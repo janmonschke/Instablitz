@@ -1,0 +1,10 @@
+c:\users\jan\documents\visual studio 2010\Projects\InstaBlitz\InstaBlitz\bin\Debug\InstaBlitz.exe.config
+c:\users\jan\documents\visual studio 2010\Projects\InstaBlitz\InstaBlitz\bin\Debug\InstaBlitz.exe
+c:\users\jan\documents\visual studio 2010\Projects\InstaBlitz\InstaBlitz\bin\Debug\InstaBlitz.pdb
+c:\users\jan\documents\visual studio 2010\Projects\InstaBlitz\InstaBlitz\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\jan\documents\visual studio 2010\Projects\InstaBlitz\InstaBlitz\obj\x86\Debug\InstaBlitz.Login.resources
+c:\users\jan\documents\visual studio 2010\Projects\InstaBlitz\InstaBlitz\obj\x86\Debug\InstaBlitz.Properties.Resources.resources
+c:\users\jan\documents\visual studio 2010\Projects\InstaBlitz\InstaBlitz\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\jan\documents\visual studio 2010\Projects\InstaBlitz\InstaBlitz\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\jan\documents\visual studio 2010\Projects\InstaBlitz\InstaBlitz\obj\x86\Debug\InstaBlitz.exe
+c:\users\jan\documents\visual studio 2010\Projects\InstaBlitz\InstaBlitz\obj\x86\Debug\InstaBlitz.pdb
