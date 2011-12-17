@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 
 namespace InstaBlitz
 {
@@ -17,6 +18,7 @@ namespace InstaBlitz
             private static Config instance;
 
             public String oauth_token;
+            public String oauth_token_secret;
             public bool developer_mode;
 
             private Config()
@@ -43,8 +45,14 @@ namespace InstaBlitz
 
             public override string ToString()
             {
+                FieldInfo[] finfo = this.GetType().GetFields();
+                for (int i = 0; i < finfo.Length; i++)
+                {
+                    Console.WriteLine(finfo[i].Name);
+                }
                 return "oauth_token:" + this.oauth_token + SEPARATOR +
-                        "dev_mode:" + this.developer_mode;
+                        "dev_mode:" + this.developer_mode + SEPARATOR +
+                        "oauth_token_secret:" + this.oauth_token_secret;
             }
         }
 }

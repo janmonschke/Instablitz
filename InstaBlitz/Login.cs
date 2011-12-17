@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
 using System.Net;
+using System.Collections.Specialized;
 
 namespace InstaBlitz
 {
@@ -74,8 +75,10 @@ namespace InstaBlitz
                 Console.WriteLine("========RESPONSE=========");
                 Stream s = res.GetResponseStream();
                 StreamReader sr2 = new StreamReader(s);
+                String response = sr2.ReadToEnd();
+                NameValueCollection values = System.Web.HttpUtility.ParseQueryString(response);
 
-                Console.Write(sr2.ReadToEnd());
+                Console.Write(response);
                 Console.WriteLine("========/RESPONSE=========");
                 s.Close();
                 sr2.Close();
@@ -93,6 +96,11 @@ namespace InstaBlitz
                 Console.WriteLine(we);
                 Console.WriteLine("========/RESPONSE ERROR=========");
             }
+        }
+
+        private void passwordBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

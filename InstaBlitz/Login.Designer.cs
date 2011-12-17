@@ -82,7 +82,7 @@
             this.emailBox.Name = "emailBox";
             this.emailBox.Size = new System.Drawing.Size(149, 20);
             this.emailBox.TabIndex = 5;
-            this.emailBox.Text = "jan.monschke@gmail.com";
+            this.emailBox.Text = "gramming.bro@gmail.com";
             // 
             // passwordBox
             // 
@@ -91,7 +91,8 @@
             this.passwordBox.PasswordChar = '*';
             this.passwordBox.Size = new System.Drawing.Size(149, 20);
             this.passwordBox.TabIndex = 6;
-            this.passwordBox.Text = "ZF23cupNj";
+            this.passwordBox.Text = "gramming.bro";
+            this.passwordBox.TextChanged += new System.EventHandler(this.passwordBox_TextChanged);
             // 
             // htmlshizzlebrowser
             // 

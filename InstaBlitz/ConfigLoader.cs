@@ -38,7 +38,7 @@ namespace InstaBlitz
         {
             String[] splitted = read.Split(Config.SEPARATOR.ToCharArray());
             this.config.oauth_token = splitted[0];
-            
+            //Config.GetField("oauth_token").SetValue(this.config, "dsfsd");
             if (splitted.Length > 1)
             {
                 bool dev_mode = splitted[1].Split(Config.IDENTIFIER.ToCharArray())[1].Equals("True");
