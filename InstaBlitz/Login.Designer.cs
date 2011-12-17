@@ -98,15 +98,16 @@
             this.htmlshizzlebrowser.Location = new System.Drawing.Point(252, 12);
             this.htmlshizzlebrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.htmlshizzlebrowser.Name = "htmlshizzlebrowser";
-            this.htmlshizzlebrowser.Size = new System.Drawing.Size(479, 112);
+            this.htmlshizzlebrowser.Size = new System.Drawing.Size(34, 112);
             this.htmlshizzlebrowser.TabIndex = 7;
+            this.htmlshizzlebrowser.Visible = false;
             this.htmlshizzlebrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(743, 136);
+            this.ClientSize = new System.Drawing.Size(248, 136);
             this.Controls.Add(this.htmlshizzlebrowser);
             this.Controls.Add(this.passwordBox);
             this.Controls.Add(this.emailBox);
