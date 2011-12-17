@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Reflection;
 
 namespace InstaBlitz
 {
@@ -14,6 +16,14 @@ namespace InstaBlitz
         public Login()
         {
             InitializeComponent();
+            string appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
+
+            appPath = appPath.Replace("\\bin\\Debug","\\htmlshizzle\\oauth-signature-manizzle.htm");
+            appPath = appPath.Replace("\\bin\\Release", "\\htmlshizzle\\oauth-signature-manizzle.htm");
+
+            htmlshizzlebrowser.Url = new Uri(appPath);
+            
+            
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -24,6 +34,12 @@ namespace InstaBlitz
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            String[] scriptParams = { emailBox.Text, passwordBox.Text };
+            htmlshizzlebrowser.Document.InvokeScript("passParams", scriptParams);
         }
     }
 }

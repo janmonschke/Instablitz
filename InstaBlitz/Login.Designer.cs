@@ -32,8 +32,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.registerLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.emailBox = new System.Windows.Forms.TextBox();
+            this.passwordBox = new System.Windows.Forms.TextBox();
+            this.htmlshizzlebrowser = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
             // button1
@@ -50,9 +51,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 13);
+            this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "E-Mail:";
+            this.label1.Text = "E-Mail / User:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
@@ -75,27 +76,40 @@
             this.registerLinkLabel.Text = "Register an account";
             this.registerLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // textBox1
+            // emailBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(86, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(149, 20);
-            this.textBox1.TabIndex = 5;
+            this.emailBox.Location = new System.Drawing.Point(86, 26);
+            this.emailBox.Name = "emailBox";
+            this.emailBox.Size = new System.Drawing.Size(149, 20);
+            this.emailBox.TabIndex = 5;
+            this.emailBox.Text = "jan.monschke@gmail.com";
             // 
-            // textBox2
+            // passwordBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(86, 56);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(149, 20);
-            this.textBox2.TabIndex = 6;
+            this.passwordBox.Location = new System.Drawing.Point(86, 56);
+            this.passwordBox.Name = "passwordBox";
+            this.passwordBox.PasswordChar = '*';
+            this.passwordBox.Size = new System.Drawing.Size(149, 20);
+            this.passwordBox.TabIndex = 6;
+            this.passwordBox.Text = "ZF23cupNj";
+            // 
+            // htmlshizzlebrowser
+            // 
+            this.htmlshizzlebrowser.Location = new System.Drawing.Point(252, 12);
+            this.htmlshizzlebrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.htmlshizzlebrowser.Name = "htmlshizzlebrowser";
+            this.htmlshizzlebrowser.Size = new System.Drawing.Size(479, 112);
+            this.htmlshizzlebrowser.TabIndex = 7;
+            this.htmlshizzlebrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(251, 136);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(743, 136);
+            this.Controls.Add(this.htmlshizzlebrowser);
+            this.Controls.Add(this.passwordBox);
+            this.Controls.Add(this.emailBox);
             this.Controls.Add(this.registerLinkLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -113,8 +127,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel registerLinkLabel;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox emailBox;
+        private System.Windows.Forms.TextBox passwordBox;
+        private System.Windows.Forms.WebBrowser htmlshizzlebrowser;
     }
 }
 
