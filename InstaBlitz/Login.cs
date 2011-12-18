@@ -20,10 +20,7 @@ namespace InstaBlitz
             InitializeComponent();
             string appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
 
-            appPath = appPath.Replace("\\bin\\Debug","\\htmlshizzle\\oauth-signature-manizzle.htm");
-            appPath = appPath.Replace("\\bin\\Release", "\\htmlshizzle\\oauth-signature-manizzle.htm");
-
-            htmlshizzlebrowser.Url = new Uri(appPath);
+            htmlshizzlebrowser.Url = new Uri(appPath + "\\oauth-signature-manizzle.htm");
             
             
         }
