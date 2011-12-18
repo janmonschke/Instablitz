@@ -20,7 +20,7 @@ namespace InstaBlitz
             InitializeComponent();
             string appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
 
-            htmlshizzlebrowser.Url = new Uri(appPath + "\\oauth-signature-manizzle.htm");
+            htmlshizzlebrowser.Url = new Uri(appPath + "\\htmlshizzle\\oauth-signature-manizzle.htm");
             
             
         }
@@ -47,7 +47,9 @@ namespace InstaBlitz
 
             WebRequest wr = WebRequest.Create(url);
             wr.Method = "POST";
+            signature = System.Web.HttpUtility.UrlEncode(signature);
             String body = NormalizedRequestParameters + "&oauth_signature=" + signature;
+            
             wr.Headers.Set(HttpRequestHeader.Authorization, body);
             wr.ContentType = "application/x-www-form-urlencoded";
             wr.ContentLength = body.Length;
