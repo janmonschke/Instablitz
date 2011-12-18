@@ -84,13 +84,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="htmlshizzle\oauth-signature-manizzle.htm" />
-    <Content Include="htmlshizzle\oauth.js" />
-    <Content Include="htmlshizzle\sha1.js" />
+    <Content Include="htmlshizzle\oauth-signature-manizzle.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="htmlshizzle\oauth.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="htmlshizzle\sha1.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(ProjectDir)\htmlshizzle\*.*" "$(TargetDir)"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
