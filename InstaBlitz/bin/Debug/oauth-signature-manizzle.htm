@@ -1,0 +1,37 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<script type="text/javascript" src="sha1.js"></script>
+		<script type="text/javascript" src="oauth.js"></script>
+		<script type="text/javascript">
+			var CONSUMERKEY = "osSPa1TgSVQjRN4nSXchaGi8Ikco8AOqnOn5kZTgMsi8HMZBMR";
+			var CONSUMERSECRET = "TctWWCqLoeKCrYBAExdfqHRtb2gS8yxFB3nXwyg1lc5RfrTSn7";
+			
+			window.signParams = function(user, password){
+				var accessor = { 
+					consumerSecret : CONSUMERSECRET,
+					tokenSecret   : ""
+				};
+				var message = { 
+					method : "POST",
+					action : "https://www.instapaper.com/api/1/oauth/access_token",
+					parameters : [
+						[ "x_auth_mode", "client_auth" ],
+						[ "x_auth_username", user ],
+						[ "x_auth_password", password ],
+						[ "oauth_version", "1.0" ],
+						[ "oauth_consumer_key", CONSUMERKEY ],
+						[ "oauth_timestamp", OAuth.timestamp() ],
+						[ "oauth_nonce", OAuth.nonce(11) ],
+						[ "oauth_signature_method", "HMAC-SHA1" ]
+					]
+				};
+				OAuth.SignatureMethod.sign(message, accessor);
+				return OAuth.getParameter(message.parameters, "oauth_signature") + "|" + OAuth.SignatureMethod.normalizeParameters(message.parameters);
+			};
+		</script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
