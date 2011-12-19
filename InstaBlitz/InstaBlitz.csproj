@@ -49,8 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="ConfigLoader.cs" />
-    <Compile Include="ConfigWriter.cs" />
+    <Compile Include="ConfigData.cs" />
     <Compile Include="InstapaperConnector.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>

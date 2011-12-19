@@ -51,6 +51,10 @@ namespace InstaBlitz
             ipc.OnOAuthTokenReceived += delegate(OAuthTokenEventArgs args)
             {
                 Console.WriteLine(args.OAuthToken);
+                ConfigData cd = Config.GetData();
+                cd.oauth_token = args.OAuthToken;
+                cd.oauth_token_secret = args.OAuthTokenSecret;
+                Config.Write();
             };
             ipc.GetOAuthToken(emailBox.Text, passwordBox.Text, htmlshizzlebrowser);
         }

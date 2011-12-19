@@ -18,7 +18,7 @@ namespace InstaBlitz
         [STAThread]
         static void Main()
         {
-            Config c = Config.GetInstance();
+            ConfigData c = Config.GetData();
             
             Console.WriteLine("Read config: " + c);
 

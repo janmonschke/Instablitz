@@ -1,58 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-
+﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using System;
 namespace InstaBlitz
 {
-        /**
-        * A singleton Config class to read and write the Config  
-        */
-        public class Config
+    class Config
+    {
+        private static ConfigData instance = null;
+
+        private Config()
         {
-            public const string FILENAME = "instablitz_config";
-            public const string SEPARATOR = "|";
-            public const string IDENTIFIER = ":";
+            
+        }
 
-            private static Config instance;
-
-            public String oauth_token;
-            public String oauth_token_secret;
-            public bool developer_mode;
-
-            private Config()
+        public static ConfigData GetData()
+        {
+            if (instance != null) return instance;
+            else
             {
-                this.oauth_token = "";
-                this.developer_mode = false;
-            }
+                Stream s;
+                ConfigData cd = new ConfigData();
+                BinaryFormatter bf = new BinaryFormatter();
 
-            public static Config GetInstance()
-            {
-                if (instance != null) return instance;
-                else {
-                    Config conf = new Config();
-                    ConfigLoader cl = new ConfigLoader(conf);
-                    cl.LoadConfig();
-                    instance = conf;
-                    return conf;
-                }
-            }
-
-            public void Write(){
-                new ConfigWriter(instance).WriteConfig();
-            }
-
-            public override string ToString()
-            {
-                FieldInfo[] finfo = this.GetType().GetFields();
-                for (int i = 0; i < finfo.Length; i++)
+                if (File.Exists(ConfigData.FILENAME) && File.ReadAllLines(ConfigData.FILENAME).Length > 0)
                 {
-                    Console.WriteLine(finfo[i].Name);
+                    s = File.Open(ConfigData.FILENAME, FileMode.OpenOrCreate);
+                    cd = (ConfigData)bf.Deserialize(s);
                 }
-                return "oauth_token:" + this.oauth_token + SEPARATOR +
-                        "dev_mode:" + this.developer_mode + SEPARATOR +
-                        "oauth_token_secret:" + this.oauth_token_secret;
+                else
+                {
+                    s = File.Open(ConfigData.FILENAME, FileMode.OpenOrCreate);
+                    bf.Serialize(s, cd);
+                }
+
+                s.Close();
+                instance = cd;
+                return cd;
             }
         }
+
+        public static void Write()
+        {
+            if (File.Exists(ConfigData.FILENAME))
+                File.Delete(ConfigData.FILENAME);
+            Stream s = File.Open(ConfigData.FILENAME, FileMode.CreateNew);
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(s, GetData());
+            s.Close();
+        }
+    }
 }
