@@ -40,7 +40,7 @@ namespace Instablitz
             InstapaperConnector ipc = new InstapaperConnector();
             ipc.OnOAuthFail += delegate(String message)
             {
-                MessageBox.Show(message);
+                MessageBox.Show(this, message, "Login error");
                 LoginButton.Text = "Login";
                 LoginButton.Enabled = true;
                 emailBox.Focus();
