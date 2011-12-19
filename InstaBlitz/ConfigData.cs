@@ -14,7 +14,7 @@ namespace InstaBlitz
         [Serializable()]
         public class ConfigData : ISerializable
         {
-            public const string FILENAME = "instablitz_config";
+            public static string FILENAME = "instablitz_config";
 
             public String oauth_token;
             public String oauth_token_secret;
