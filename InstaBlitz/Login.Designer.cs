@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
-            this.button1 = new System.Windows.Forms.Button();
+            this.LoginButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.registerLinkLabel = new System.Windows.Forms.LinkLabel();
@@ -38,15 +38,15 @@
             this.htmlshizzlebrowser = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
-            // button1
+            // LoginButton
             // 
-            this.button1.Location = new System.Drawing.Point(160, 100);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Login";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.LoginButton.Location = new System.Drawing.Point(160, 100);
+            this.LoginButton.Name = "LoginButton";
+            this.LoginButton.Size = new System.Drawing.Size(75, 23);
+            this.LoginButton.TabIndex = 0;
+            this.LoginButton.Text = "Login";
+            this.LoginButton.UseVisualStyleBackColor = true;
+            this.LoginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // label1
             // 
@@ -56,7 +56,6 @@
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "E-Mail / User:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -84,7 +83,7 @@
             this.emailBox.Name = "emailBox";
             this.emailBox.Size = new System.Drawing.Size(149, 20);
             this.emailBox.TabIndex = 5;
-            this.emailBox.Text = "gramming.bro@gmail.com";
+            this.emailBox.Text = "ddgramming.bro@gmail.com";
             // 
             // passwordBox
             // 
@@ -94,7 +93,6 @@
             this.passwordBox.Size = new System.Drawing.Size(149, 20);
             this.passwordBox.TabIndex = 6;
             this.passwordBox.Text = "gramming.bro";
-            this.passwordBox.TextChanged += new System.EventHandler(this.passwordBox_TextChanged);
             // 
             // htmlshizzlebrowser
             // 
@@ -117,7 +115,7 @@
             this.Controls.Add(this.registerLinkLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.LoginButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
             this.Text = "Instablitz - Login";
@@ -129,7 +127,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel registerLinkLabel;

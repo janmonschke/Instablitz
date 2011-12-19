@@ -23,6 +23,8 @@ namespace Instablitz
     {
         private WebRequest currentRequest = WebRequest.Create(new Uri("http://localhost"));
 
+        public delegate void OAuthFailed(String message);
+        public event OAuthFailed OnOAuthFail;
         public delegate void OAuthTokenReceivedHandler(OAuthTokenEventArgs oae);
         public event OAuthTokenReceivedHandler OnOAuthTokenReceived;
 
@@ -80,7 +82,7 @@ namespace Instablitz
                 Console.WriteLine("========EXCEPTION MESSAGE=========");
                 Console.WriteLine(we);
                 Console.WriteLine("========/RESPONSE ERROR=========");
-                throw new AuthenticationException("Wrong user/password combination.");
+                OnOAuthFail("Wrong user/password combination.");
             }
 
         } // GetOAuthToken

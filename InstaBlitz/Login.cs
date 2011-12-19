@@ -19,10 +19,7 @@ namespace Instablitz
         {
             InitializeComponent();
             string appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
-
             htmlshizzlebrowser.Url = new Uri(appPath + "\\htmlshizzle\\oauth-signature-manizzle.htm");
-            
-            
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -30,24 +27,24 @@ namespace Instablitz
             System.Diagnostics.Process.Start("http://www.instapaper.com/user/register");
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-
+            emailBox.Focus();
         }
 
-        private void passwordBox_TextChanged(object sender, EventArgs e)
+        private void loginButton_Click(object sender, EventArgs e)
         {
-            
-        }
+            LoginButton.Text = "Loading...";
+            LoginButton.Enabled = false;
 
-        private void button1_Click(object sender, EventArgs e)
-        {
             InstapaperConnector ipc = new InstapaperConnector();
+            ipc.OnOAuthFail += delegate(String message)
+            {
+                MessageBox.Show(message);
+                LoginButton.Text = "Login";
+                LoginButton.Enabled = true;
+                emailBox.Focus();
+            };
             ipc.OnOAuthTokenReceived += delegate(OAuthTokenEventArgs args)
             {
                 Console.WriteLine(args.OAuthToken);
