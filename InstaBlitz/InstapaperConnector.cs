@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Net;
 using System.IO;
 using System.Collections.Specialized;
+using System.Runtime.Remoting.Messaging;
 
 namespace InstaBlitz
 {
@@ -13,9 +14,24 @@ namespace InstaBlitz
         public AuthenticationException(String message) : base(message) {  }
     }
 
+    public class OAuthTokenEventArgs : EventArgs {
+        public String OAuthToken;
+        public String OAuthTokenSecret;
+    }
+
     class InstapaperConnector
     {
-        public static NameValueCollection GetOAuthToken(String email, String password, WebBrowser browser) {
+        private WebRequest currentRequest = WebRequest.Create(new Uri("http://localhost"));
+
+        public delegate void OAuthTokenReceivedHandler(OAuthTokenEventArgs oae);
+        public event OAuthTokenReceivedHandler OnOAuthTokenReceived;
+
+        private void cleanUp(AsyncCallback callback)
+        {
+            currentRequest.Abort();
+        }
+
+        public void GetOAuthToken(String email, String password, WebBrowser browser) {
             // let the js implementation pf the oauth hashing hash our params, LIKE A BOSS!
             String[] scriptParams = { email, password };
             String oauthShizzle = (String)browser.Document.InvokeScript("signParams", scriptParams);
@@ -31,13 +47,13 @@ namespace InstaBlitz
             String body = NormalizedRequestParameters + "&oauth_signature=" + signature;
 
             // prepare the webrequest
-            WebRequest wr = WebRequest.Create(url);
-            wr.Method = "POST";
-            wr.Headers.Set(HttpRequestHeader.Authorization, body);
-            wr.ContentType = "application/x-www-form-urlencoded";
-            wr.ContentLength = body.Length;
+            currentRequest = WebRequest.Create(url);
+            currentRequest.Method = "POST";
+            currentRequest.Headers.Set(HttpRequestHeader.Authorization, body);
+            currentRequest.ContentType = "application/x-www-form-urlencoded";
+            currentRequest.ContentLength = body.Length;
             // write the request's body
-            Stream r = wr.GetRequestStream();
+            Stream r = currentRequest.GetRequestStream();
             StreamWriter sr = new StreamWriter(r);
             for (int i = 0; i < body.Length; i++)
             {
@@ -50,15 +66,7 @@ namespace InstaBlitz
             // do the request
             try
             {
-                WebResponse res = wr.GetResponse();
-                Stream s = res.GetResponseStream();
-                StreamReader sr2 = new StreamReader(s);
-                String response = sr2.ReadToEnd();
-                NameValueCollection values = System.Web.HttpUtility.ParseQueryString(response);
-                
-                s.Close();
-                sr2.Close();
-                return values;
+                currentRequest.BeginGetResponse(new AsyncCallback(__receivedOAuthToken), null);
             }
             catch (WebException we)
             {
@@ -74,7 +82,25 @@ namespace InstaBlitz
                 Console.WriteLine("========/RESPONSE ERROR=========");
                 throw new AuthenticationException("Wrong user/password combination.");
             }
-            return new NameValueCollection();
+
+        } // GetOAuthToken
+
+        private void __receivedOAuthToken(IAsyncResult result)
+        {
+            currentRequest.EndGetResponse(result);
+            WebResponse res = currentRequest.GetResponse();
+            Stream s = res.GetResponseStream();
+            StreamReader sr2 = new StreamReader(s);
+            String response = sr2.ReadToEnd();
+            NameValueCollection values = System.Web.HttpUtility.ParseQueryString(response);
+            s.Close();
+            sr2.Close();
+            OAuthTokenEventArgs oae = new OAuthTokenEventArgs();
+            oae.OAuthToken = values.Get("oauth_token");
+            oae.OAuthTokenSecret = values.Get("oauth_token_secret");
+            OnOAuthTokenReceived(oae);
         }
-    }
+    } 
+
+    
 }

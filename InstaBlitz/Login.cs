@@ -37,12 +37,22 @@ namespace InstaBlitz
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            InstapaperConnector.GetOAuthToken(emailBox.Text, passwordBox.Text, htmlshizzlebrowser);
+
         }
 
         private void passwordBox_TextChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            InstapaperConnector ipc = new InstapaperConnector();
+            ipc.OnOAuthTokenReceived += delegate(OAuthTokenEventArgs args)
+            {
+                Console.WriteLine(args.OAuthToken);
+            };
+            ipc.GetOAuthToken(emailBox.Text, passwordBox.Text, htmlshizzlebrowser);
         }
     }
 }
