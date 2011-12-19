@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="5dee0389-ff9d-4ac0-a84a-48d93545578f" name="bro@JAN 2011-12-19 14:37:13" runUser="JAN\bro" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Lokal" id="04846d08-49f5-4749-add3-78b8dd59235e">
+    <Description>Dies sind die standardmäßigen Testeinstellungen für einen lokalen Testlauf.</Description>
+    <Deployment enabled="false" runDeploymentRoot="bro_JAN 2011-12-19 14_37_13">
+      <DeploymentItem filename="C:\Dokumente und Einstellungen\bro\Eigene Dateien\Visual Studio 2010\Projects\Instablitz\InstaBlitz\bin\Debug\InstaBlitz.exe" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2011-12-19T14:37:13.3697378+01:00" queuing="2011-12-19T14:37:16.3039570+01:00" start="2011-12-19T14:37:16.7846482+01:00" finish="2011-12-19T14:37:17.7760738+01:00" />
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="WriteTest" storage="c:\dokumente und einstellungen\bro\eigene dateien\visual studio 2010\projects\instablitz\testinstablitz\bin\debug\testinstablitz.dll" id="4decc10a-20f3-8432-7d85-db2a73ba5e1a">
+      <Execution id="8043ffac-5d99-40ee-aca9-92c65413f1e7" />
+      <TestMethod codeBase="C:/Dokumente und Einstellungen/bro/Eigene Dateien/Visual Studio 2010/Projects/Instablitz/TestInstablitz/bin/Debug/TestInstablitz.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestInstablitz.ConfigTest, TestInstablitz, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="WriteTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Nicht in einer Liste enthaltene Ergebnisse" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Alle geladenen Ergebnisse" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="4decc10a-20f3-8432-7d85-db2a73ba5e1a" executionId="8043ffac-5d99-40ee-aca9-92c65413f1e7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="8043ffac-5d99-40ee-aca9-92c65413f1e7" testId="4decc10a-20f3-8432-7d85-db2a73ba5e1a" testName="WriteTest" computerName="JAN" duration="00:00:00.1033924" startTime="2011-12-19T14:37:16.8948066+01:00" endTime="2011-12-19T14:37:17.5757858+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8043ffac-5d99-40ee-aca9-92c65413f1e7">
+      <Output>
+        <ErrorInfo>
+          <Message>Die TestInstablitz.ConfigTest.WriteTest-Testmethode hat eine Ausnahme ausgelöst: System.IO.IOException: Der Prozess kann nicht auf die Datei "C:\Dokumente und Einstellungen\bro\Eigene Dateien\Visual Studio 2010\Projects\Instablitz\TestResults\bro_JAN 2011-12-19 14_37_13\Out\instablitz_config" zugreifen, da sie von einem anderen Prozess verwendet wird.</Message>
+          <StackTrace>    bei System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   bei System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   bei System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   bei System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   bei System.IO.StreamReader..ctor(String path, Encoding encoding)
+   bei System.IO.File.InternalReadAllLines(String path, Encoding encoding)
+   bei System.IO.File.ReadAllLines(String path)
+   bei InstaBlitz.Config.GetData() in C:\Dokumente und Einstellungen\bro\Eigene Dateien\Visual Studio 2010\Projects\Instablitz\InstaBlitz\Config.cs:Zeile 25.
+   bei InstaBlitz.Config.Write() in C:\Dokumente und Einstellungen\bro\Eigene Dateien\Visual Studio 2010\Projects\Instablitz\InstaBlitz\Config.cs:Zeile 48.
+   bei TestInstablitz.ConfigTest.WriteTest() in C:\Dokumente und Einstellungen\bro\Eigene Dateien\Visual Studio 2010\Projects\Instablitz\TestInstablitz\ConfigTest.cs:Zeile 73.
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>
