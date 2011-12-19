@@ -10,6 +10,7 @@ using System.IO;
 using System.Reflection;
 using System.Net;
 using System.Collections.Specialized;
+using InstaBlitz;
 
 namespace Instablitz
 {
@@ -37,7 +38,7 @@ namespace Instablitz
             LoginButton.Text = "Loading...";
             LoginButton.Enabled = false;
 
-            InstapaperConnector ipc = new InstapaperConnector();
+            InstapaperConnector ipc = new InstapaperConnector(new OAuthHelper(htmlshizzlebrowser));
             ipc.OnOAuthFail += delegate(String message)
             {
                 MessageBox.Show(this, message, "Login error");
@@ -52,8 +53,11 @@ namespace Instablitz
                 cd.oauth_token = args.OAuthToken;
                 cd.oauth_token_secret = args.OAuthTokenSecret;
                 Config.Write();
+                MessageBox.Show("Your Token has been created", "Success");
             };
-            ipc.GetOAuthToken(emailBox.Text, passwordBox.Text, htmlshizzlebrowser);
+            
+            //ipc.GetOAuthToken(emailBox.Text, passwordBox.Text);
+            ipc.VerifyCredentials();
         }
 
         private void Login_Load(object sender, EventArgs e)

@@ -7,24 +7,31 @@
 			var CONSUMERKEY = "osSPa1TgSVQjRN4nSXchaGi8Ikco8AOqnOn5kZTgMsi8HMZBMR";
 			var CONSUMERSECRET = "TctWWCqLoeKCrYBAExdfqHRtb2gS8yxFB3nXwyg1lc5RfrTSn7";
 			
-			window.signParams = function(user, password){
+			window.signParams = function(){
+				var params = [];
+				var oauth_token_secret = "";
+				if(arguments.length > 1)
+					for(var i = 1; i < arguments.length; i++){
+						if(arguments[i] != "oauth_token_secret")
+							params.push([ arguments[i], arguments[++i]]);
+						else
+							oauth_token_secret = arguments[++i];
+					}
+				
+				params.push([ "oauth_consumer_key", CONSUMERKEY ]);
+				params.push([ "oauth_version", "1.0" ]);
+				params.push([ "oauth_timestamp", OAuth.timestamp() ]);
+				params.push([ "oauth_nonce", OAuth.nonce(11) ]);
+				params.push([ "oauth_signature_method", "HMAC-SHA1" ]);
+
 				var accessor = { 
 					consumerSecret : CONSUMERSECRET,
-					tokenSecret   : ""
+					tokenSecret   : oauth_token_secret
 				};
 				var message = { 
 					method : "POST",
-					action : "https://www.instapaper.com/api/1/oauth/access_token",
-					parameters : [
-						[ "x_auth_mode", "client_auth" ],
-						[ "x_auth_username", user ],
-						[ "x_auth_password", password ],
-						[ "oauth_version", "1.0" ],
-						[ "oauth_consumer_key", CONSUMERKEY ],
-						[ "oauth_timestamp", OAuth.timestamp() ],
-						[ "oauth_nonce", OAuth.nonce(11) ],
-						[ "oauth_signature_method", "HMAC-SHA1" ]
-					]
+					action : arguments[0],
+					parameters : params
 				};
 				OAuth.SignatureMethod.sign(message, accessor);
 				return OAuth.getParameter(message.parameters, "oauth_signature") + "|" + OAuth.SignatureMethod.normalizeParameters(message.parameters);

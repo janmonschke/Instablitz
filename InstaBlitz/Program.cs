@@ -22,10 +22,11 @@ namespace Instablitz
             
             // Get the config
             ConfigData c = Config.GetData();
-            if (c.oauth_token.Length > 0)
-                MessageBox.Show("Woohooo, you've already been authenticated before");
-            else
-                Application.Run(new Login());
+            Application.Run(new Login());
+            //if (c.oauth_token.Length > 0)
+            //    new InstapaperConnector().GetFolderList(c.oauth_token, c.oauth_token_secret);
+            //else
+                
 
             Console.WriteLine("Read config: " + c);
         }

@@ -83,7 +83,7 @@
             this.emailBox.Name = "emailBox";
             this.emailBox.Size = new System.Drawing.Size(149, 20);
             this.emailBox.TabIndex = 5;
-            this.emailBox.Text = "ddgramming.bro@gmail.com";
+            this.emailBox.Text = "gramming.bro@gmail.com";
             // 
             // passwordBox
             // 
