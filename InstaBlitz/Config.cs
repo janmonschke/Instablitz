@@ -2,7 +2,7 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System;
-namespace InstaBlitz
+namespace Instablitz
 {
     class Config
     {

@@ -1,4 +1,4 @@
-﻿namespace InstaBlitz
+﻿namespace Instablitz
 {
     partial class Login
     {
@@ -120,7 +120,8 @@
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
-            this.Text = "InstaBlitz - Login";
+            this.Text = "Instablitz - Login";
+            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

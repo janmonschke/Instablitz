@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Net;
 using System.Collections.Specialized;
 
-namespace InstaBlitz
+namespace Instablitz
 {
     public partial class Login : Form
     {
@@ -57,6 +57,11 @@ namespace InstaBlitz
                 Config.Write();
             };
             ipc.GetOAuthToken(emailBox.Text, passwordBox.Text, htmlshizzlebrowser);
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

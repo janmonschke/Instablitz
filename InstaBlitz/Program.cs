@@ -6,7 +6,7 @@ using System.Configuration;
 using System.Net;
 using System.IO;
 
-namespace InstaBlitz
+namespace Instablitz
 {
     static class Program
     {

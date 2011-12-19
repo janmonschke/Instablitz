@@ -1,4 +1,4 @@
-﻿using InstaBlitz;
+﻿using Instablitz;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 

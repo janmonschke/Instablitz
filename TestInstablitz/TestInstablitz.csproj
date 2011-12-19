@@ -58,9 +58,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InstaBlitz\InstaBlitz.csproj">
+    <ProjectReference Include="..\InstaBlitz\Instablitz.csproj">
       <Project>{50FA6B7D-496F-403F-AC55-9EE646784653}</Project>
-      <Name>InstaBlitz</Name>
+      <Name>Instablitz</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

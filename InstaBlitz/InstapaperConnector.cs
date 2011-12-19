@@ -8,7 +8,7 @@ using System.IO;
 using System.Collections.Specialized;
 using System.Runtime.Remoting.Messaging;
 
-namespace InstaBlitz
+namespace Instablitz
 {
     public class AuthenticationException : Exception {
         public AuthenticationException(String message) : base(message) {  }
