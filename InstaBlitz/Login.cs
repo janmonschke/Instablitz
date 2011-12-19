@@ -27,7 +27,7 @@ namespace InstaBlitz
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            System.Diagnostics.Process.Start("http://www.instapaper.com/user/register");
         }
 
         private void label1_Click(object sender, EventArgs e)
