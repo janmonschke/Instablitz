@@ -30,5 +30,10 @@ namespace InstaBlitz
         {
 
         }
+
+        private void FolderList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
