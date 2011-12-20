@@ -15,7 +15,16 @@ namespace Instablitz
         public static bool IsConnected()
         {
             Ping p = new Ping();
-            PingReply pr = p.Send("google.com");
+            PingReply pr;
+            try
+            {
+                pr = p.Send("google.com");
+            }
+            catch
+            {
+                return false;
+            }
+            
             return pr.Status == IPStatus.Success;
         }
 

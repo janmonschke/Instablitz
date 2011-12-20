@@ -8,6 +8,7 @@ using System.IO;
 using System.Collections.Specialized;
 using System.Runtime.Remoting.Messaging;
 using InstaBlitz;
+using fastJSON;
 
 namespace Instablitz
 {
@@ -28,6 +29,7 @@ namespace Instablitz
         public InstapaperConnector(OAuthHelper h)
         {
             this.helper = h;
+            
         }
 
         public delegate void OAuthFailed(String message);
@@ -155,7 +157,10 @@ namespace Instablitz
 
                 Stream s = we.Response.GetResponseStream();
                 StreamReader sr2 = new StreamReader(s);
-                Console.WriteLine(sr2.ReadToEnd());
+                String response = sr2.ReadToEnd();
+                JsonParser p = new JsonParser(response);
+                var decoded = p.Decode();
+                Console.WriteLine(decoded.GetType());
                 sr2.Close();
                 s.Close();
                 Console.WriteLine("========EXCEPTION MESSAGE=========");
