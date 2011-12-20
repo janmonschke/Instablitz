@@ -5,11 +5,19 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.Net;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Net.NetworkInformation;
 
 namespace Instablitz
 {
     static class Program
     {
+        public static bool IsConnected()
+        {
+            Ping p = new Ping();
+            PingReply pr = p.Send("google.com");
+            return pr.Status == IPStatus.Success;
+        }
 
         /// <summary>
         /// Der Haupteinstiegspunkt für die Anwendung.
@@ -22,7 +30,13 @@ namespace Instablitz
             
             // Get the config
             ConfigData c = Config.GetData();
-            Application.Run(new Login());
+            Console.WriteLine("start");
+            if (IsConnected())
+                Application.Run(new Login());
+            else
+                MessageBox.Show("offline");
+
+            
             //if (c.oauth_token.Length > 0)
             //    new InstapaperConnector().GetFolderList(c.oauth_token, c.oauth_token_secret);
             //else
