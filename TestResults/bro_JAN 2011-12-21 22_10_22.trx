@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="29c9b3d9-a94c-4fbf-9a98-d4b945fd28b0" name="bro@JAN 2011-12-21 22:10:22" runUser="JAN\bro" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Lokal" id="04846d08-49f5-4749-add3-78b8dd59235e">
+    <Description>Dies sind die standardmäßigen Testeinstellungen für einen lokalen Testlauf.</Description>
+    <Deployment enabled="false" runDeploymentRoot="bro_JAN 2011-12-21 22_10_22">
+      <DeploymentItem filename="C:\Dokumente und Einstellungen\bro\Eigene Dateien\Visual Studio 2010\Projects\Instablitz\InstaBlitz\bin\Debug\InstaBlitz.exe" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2011-12-21T22:10:22.4991058+01:00" queuing="2011-12-21T22:10:48.6337444+01:00" start="2011-12-21T22:10:53.8063248+01:00" finish="2011-12-21T22:11:19.8445534+01:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="GetDataTest" storage="c:\dokumente und einstellungen\bro\eigene dateien\visual studio 2010\projects\instablitz\testinstablitz\bin\debug\testinstablitz.dll" id="35ff7f4e-b488-4e85-f5c9-06a8556d1316">
+      <Execution id="b5963203-5249-4bb1-a6e0-606b5037bfa9" />
+      <TestMethod codeBase="C:/Dokumente und Einstellungen/bro/Eigene Dateien/Visual Studio 2010/Projects/Instablitz/TestInstablitz/bin/Debug/TestInstablitz.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TestInstablitz.ConfigTest, TestInstablitz, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetDataTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Nicht in einer Liste enthaltene Ergebnisse" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Alle geladenen Ergebnisse" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="35ff7f4e-b488-4e85-f5c9-06a8556d1316" executionId="b5963203-5249-4bb1-a6e0-606b5037bfa9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="b5963203-5249-4bb1-a6e0-606b5037bfa9" testId="35ff7f4e-b488-4e85-f5c9-06a8556d1316" testName="GetDataTest" computerName="JAN" duration="00:00:01.0293771" startTime="2011-12-21T22:10:56.1303364+01:00" endTime="2011-12-21T22:11:12.8961439+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b5963203-5249-4bb1-a6e0-606b5037bfa9">
+    </UnitTestResult>
+  </Results>
+</TestRun>

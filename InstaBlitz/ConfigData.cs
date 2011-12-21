@@ -46,7 +46,8 @@ namespace Instablitz
 
             public bool IsUserAuthenticated()
             {
-                return this.oauth_token_secret.Length > 0 && this.oauth_token.Length > 0;
+                return this.oauth_token_secret != null && this.oauth_token_secret.Length > 0
+                    && this.oauth_token != null && this.oauth_token.Length > 0;
             }
         }
 }

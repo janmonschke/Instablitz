@@ -51,8 +51,8 @@ namespace Instablitz
 
         public static void Delete()
         {
-            instance = new ConfigData();
-            Write();
+            if (File.Exists(ConfigData.FILENAME))
+                File.Delete(ConfigData.FILENAME);
         }
     }
 }

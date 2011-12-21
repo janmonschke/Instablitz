@@ -1,18 +1,17 @@
 ﻿using Instablitz;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.IO;
 
 namespace TestInstablitz
 {
     
     
     /// <summary>
-    ///Dies ist eine Testklasse für "ConfigTest" und soll
-    ///alle ConfigTest Komponententests enthalten.
+    ///Dies ist eine Testklasse für "ConfigDataTest" und soll
+    ///alle ConfigDataTest Komponententests enthalten.
     ///</summary>
     [TestClass()]
-    public class ConfigTest
+    public class ConfigDataTest
     {
 
 
@@ -66,53 +65,25 @@ namespace TestInstablitz
 
 
         /// <summary>
-        ///Ein Test für "Write"
+        ///Ein Test für "IsUserAuthenticated"
         ///</summary>
         [TestMethod()]
-        public void WriteTest()
+        public void IsUserAuthenticatedTest()
         {
-            ConfigData cd = Config.GetData();
-            cd.oauth_token = "";
-            cd.oauth_token_secret = "";
-            Config.Write();
+            // should return false for empty Config Data
+            ConfigData target = new ConfigData();
+            Assert.IsFalse(target.IsUserAuthenticated());
 
-            // test if file exists
-            Assert.IsTrue(File.Exists(ConfigData.FILENAME));
-        }
+            target.oauth_token = "aasdoh0e9h8füin";
+            Assert.IsFalse(target.IsUserAuthenticated());
 
-        /// <summary>
-        ///Ein Test für "GetData"
-        ///</summary>
-        [TestMethod()]
-        public void GetDataTest()
-        {
-            ConfigData expected = new ConfigData();
-            ConfigData actual;
-            actual = Config.GetData();
+            target.oauth_token = null;
+            target.oauth_token_secret = "038tzhüi0hü0s8egspdfnpn++";
+            Assert.IsFalse(target.IsUserAuthenticated());
 
-            // Both objects should have the same value
-            Assert.AreEqual(expected.oauth_token, actual.oauth_token);
-            Assert.AreEqual(expected.oauth_token_secret, actual.oauth_token_secret);
-            Assert.AreEqual(expected.developer_mode, actual.developer_mode);
-
-            // Check for file on disk
-            Assert.IsTrue(File.Exists(ConfigData.FILENAME));
-        }
-
-        /// <summary>
-        ///Ein Test für "Delete"
-        ///</summary>
-        [TestMethod()]
-        public void DeleteTest()
-        {
-            // Delete() should not fail if no file exists
-            Config.Delete();
-            Assert.IsFalse(File.Exists(ConfigData.FILENAME));
-
-            // Create and delete a config file
-            ConfigData cd = Config.GetData();
-            Config.Delete();
-            Assert.IsFalse(File.Exists(ConfigData.FILENAME));
+            // should only work when both are set
+            target.oauth_token = "aasdoh0e9h8füin";
+            Assert.IsTrue(target.IsUserAuthenticated());
         }
     }
 }
