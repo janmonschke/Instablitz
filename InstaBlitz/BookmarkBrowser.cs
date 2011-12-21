@@ -16,20 +16,7 @@ namespace InstaBlitz
         public BookmarkBrowser()
         {
             InitializeComponent();
-            ConfigData cd = Config.GetData();
-            DialogResult dr;
-            if (IsConnected())
-                if (!cd.IsUserAuthenticated())
-                {
-                    dr = new Login().ShowDialog(this);
-                    if (dr == DialogResult.Cancel)
-                        this.Close();
-                }
-                else
-                    Console.WriteLine("load data");
-            else
-                MessageBox.Show("offline mode");
-
+           
         }
 
         public static bool IsConnected()
@@ -74,6 +61,7 @@ namespace InstaBlitz
             DialogResult res = MessageBox.Show("Are you sure you want to logout? (All cached data will get lost)", "Confirm Logout", MessageBoxButtons.YesNo);
             if (res == DialogResult.Yes)
             {
+                Config.Delete();
                 // show the login view when he logged out
                 DialogResult dr = new Login().ShowDialog(this);
                 
@@ -84,5 +72,23 @@ namespace InstaBlitz
                 
 
         }
+
+        private void BookmarkBrowser_Load(object sender, EventArgs e)
+        {
+            ConfigData cd = Config.GetData();
+            DialogResult dr;
+            if (IsConnected())
+                if (!cd.IsUserAuthenticated())
+                {
+                    dr = new Login().ShowDialog(this);
+                    if (dr == DialogResult.Cancel)
+                        this.Close();
+                }
+                else
+                    Console.WriteLine("load data");
+            else
+                MessageBox.Show("offline mode");
+        }
+        
     }
 }
