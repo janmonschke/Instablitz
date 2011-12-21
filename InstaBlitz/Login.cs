@@ -54,6 +54,8 @@ namespace Instablitz
                 cd.oauth_token_secret = args.OAuthTokenSecret;
                 Config.Write();
                 MessageBox.Show("Your Token has been created", "Success");
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             };
             
             ipc.GetOAuthToken(emailBox.Text, passwordBox.Text);

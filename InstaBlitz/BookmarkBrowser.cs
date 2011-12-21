@@ -35,6 +35,11 @@ namespace InstaBlitz
             return pr.Status == IPStatus.Success;
         }
 
+        private void displayData()
+        {
+            MessageBox.Show("User is authenticated, all systems working...finally load data");
+        }
+
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -64,13 +69,13 @@ namespace InstaBlitz
                 Config.Delete();
                 // show the login view when he logged out
                 DialogResult dr = new Login().ShowDialog(this);
-                
+                Console.WriteLine(dr);
                 // when the login view has been cancelled, close the program
                 if (dr == DialogResult.Cancel)
                     this.Close();
+                else
+                    this.displayData();
             }
-                
-
         }
 
         private void BookmarkBrowser_Load(object sender, EventArgs e)
@@ -83,9 +88,11 @@ namespace InstaBlitz
                     dr = new Login().ShowDialog(this);
                     if (dr == DialogResult.Cancel)
                         this.Close();
+                    else if (dr == DialogResult.OK)
+                        this.displayData();
                 }
                 else
-                    Console.WriteLine("load data");
+                    this.displayData();
             else
                 MessageBox.Show("offline mode");
         }
