@@ -35,9 +35,11 @@
             this.BookmarkList = new System.Windows.Forms.ListView();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.BookmarkView = new System.Windows.Forms.WebBrowser();
+            this.ArchiveButton = new System.Windows.Forms.Button();
             this.LikeBookmarkButton = new System.Windows.Forms.Button();
             this.DeleteBookmarkButton = new System.Windows.Forms.Button();
-            this.ArchiveButton = new System.Windows.Forms.Button();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.LogoutButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -50,6 +52,10 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -60,7 +66,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.FolderList);
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer4);
             this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
             // 
             // splitContainer1.Panel2
@@ -75,7 +81,7 @@
             this.FolderList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FolderList.Location = new System.Drawing.Point(0, 0);
             this.FolderList.Name = "FolderList";
-            this.FolderList.Size = new System.Drawing.Size(133, 436);
+            this.FolderList.Size = new System.Drawing.Size(133, 403);
             this.FolderList.TabIndex = 0;
             this.FolderList.UseCompatibleStateImageBehavior = false;
             this.FolderList.View = System.Windows.Forms.View.List;
@@ -138,6 +144,16 @@
             this.BookmarkView.Size = new System.Drawing.Size(480, 407);
             this.BookmarkView.TabIndex = 2;
             // 
+            // ArchiveButton
+            // 
+            this.ArchiveButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ArchiveButton.Location = new System.Drawing.Point(75, 0);
+            this.ArchiveButton.Name = "ArchiveButton";
+            this.ArchiveButton.Size = new System.Drawing.Size(75, 25);
+            this.ArchiveButton.TabIndex = 2;
+            this.ArchiveButton.Text = "Archive";
+            this.ArchiveButton.UseVisualStyleBackColor = true;
+            // 
             // LikeBookmarkButton
             // 
             this.LikeBookmarkButton.Dock = System.Windows.Forms.DockStyle.Left;
@@ -158,15 +174,34 @@
             this.DeleteBookmarkButton.Text = "Delete";
             this.DeleteBookmarkButton.UseVisualStyleBackColor = true;
             // 
-            // ArchiveButton
+            // splitContainer4
             // 
-            this.ArchiveButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ArchiveButton.Location = new System.Drawing.Point(75, 0);
-            this.ArchiveButton.Name = "ArchiveButton";
-            this.ArchiveButton.Size = new System.Drawing.Size(75, 25);
-            this.ArchiveButton.TabIndex = 2;
-            this.ArchiveButton.Text = "Archive";
-            this.ArchiveButton.UseVisualStyleBackColor = true;
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.LogoutButton);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.FolderList);
+            this.splitContainer4.Size = new System.Drawing.Size(133, 436);
+            this.splitContainer4.SplitterDistance = 29;
+            this.splitContainer4.TabIndex = 1;
+            // 
+            // LogoutButton
+            // 
+            this.LogoutButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LogoutButton.Location = new System.Drawing.Point(0, 0);
+            this.LogoutButton.Name = "LogoutButton";
+            this.LogoutButton.Size = new System.Drawing.Size(133, 29);
+            this.LogoutButton.TabIndex = 0;
+            this.LogoutButton.Text = "Log out";
+            this.LogoutButton.UseVisualStyleBackColor = true;
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // BookmarkBrowser
             // 
@@ -189,6 +224,10 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
+            this.splitContainer4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -204,6 +243,8 @@
         private System.Windows.Forms.Button LikeBookmarkButton;
         private System.Windows.Forms.Button DeleteBookmarkButton;
         private System.Windows.Forms.Button ArchiveButton;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.Button LogoutButton;
 
     }
 }
