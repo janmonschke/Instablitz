@@ -56,8 +56,8 @@ namespace Instablitz
                 MessageBox.Show("Your Token has been created", "Success");
             };
             
-            //ipc.GetOAuthToken(emailBox.Text, passwordBox.Text);
-            ipc.VerifyCredentials();
+            ipc.GetOAuthToken(emailBox.Text, passwordBox.Text);
+            //ipc.VerifyCredentials();
         }
 
         private void Login_Load(object sender, EventArgs e)
