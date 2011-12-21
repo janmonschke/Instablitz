@@ -43,5 +43,10 @@ namespace Instablitz
                 return "oauth_token:" + this.oauth_token + " " +
                         "oauth_token_secret:" + this.oauth_token_secret;
             }
+
+            public bool IsUserAuthenticated()
+            {
+                return this.oauth_token_secret.Length > 0 && this.oauth_token.Length > 0;
+            }
         }
 }
