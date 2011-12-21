@@ -3,3 +3,4 @@
 *.exe
 InstaBlitz/bin/
 InstaBlitz/obj/
+InstaBlitz/TestResults/*
