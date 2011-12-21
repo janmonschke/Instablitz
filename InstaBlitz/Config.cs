@@ -48,5 +48,11 @@ namespace Instablitz
             bf.Serialize(s, GetData());
             s.Close();
         }
+
+        public static void Delete()
+        {
+            instance = new ConfigData();
+            Write();
+        }
     }
 }
