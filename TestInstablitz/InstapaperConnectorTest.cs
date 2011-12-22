@@ -81,7 +81,10 @@ namespace TestInstablitz
                 InstapaperConnector target = new InstapaperConnector(h); // TODO: Passenden Wert initialisieren
                 target.OnFoldersReceived += delegate(List<Folder> folders) {
                     // Should return an empty List in case of zero folders
-                    Assert.IsNotNull(folders);
+                    Console.WriteLine(folders);
+                    if(folders.Capacity > 0)
+                        foreach (Folder f in folders)
+                            Assert.IsNotNull(f);
                 };
                 target.GetFolderList();
             };
