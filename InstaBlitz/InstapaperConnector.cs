@@ -9,6 +9,7 @@ using System.Collections.Specialized;
 using System.Runtime.Remoting.Messaging;
 using InstaBlitz;
 using fastJSON;
+using InstaBlitz.Models;
 
 namespace Instablitz
 {
@@ -42,7 +43,7 @@ namespace Instablitz
             currentRequest.Abort();
         }
 
-        private void createRequest(String url, String[] scriptParams)
+        private WebRequest createRequest(String url, String[] scriptParams)
         {
             ConfigData cd = Config.GetData();
             if(cd.oauth_token.Length > 0 && cd.oauth_token_secret.Length > 0){
@@ -81,6 +82,7 @@ namespace Instablitz
             }
             sr.Close();
             r.Close();
+            return currentRequest;
         }
 
         public void GetOAuthToken(String user, String password) {
@@ -169,13 +171,26 @@ namespace Instablitz
                 OnOAuthFail("Wrong user/password combination.");
             }
         }
+        
+        public delegate void FoldersReceived(List<Folder> folders);
+        public event FoldersReceived OnFoldersReceived;
 
         public void GetFolderList()
         {
-            
-          
-
-
+            List<Folder> folders = new List<Folder>();
+            Folder f1 = new Folder(this);
+            f1.Id = "1";
+            f1.Title = "First one";
+            Folder f2 = new Folder(this);
+            f2.Id = "2";
+            f2.Title = "Second folder";
+            Folder f3 = new Folder(this);
+            f3.Id = "3";
+            f3.Title = "Third and last folder";
+            folders.Add(f1);
+            folders.Add(f2);
+            folders.Add(f3);
+            OnFoldersReceived(folders);
         }
     } 
 
