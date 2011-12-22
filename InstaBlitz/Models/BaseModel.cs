@@ -32,9 +32,9 @@ namespace InstaBlitz.Models
         public event ModelCallback OnDelete;
 
         // Load the model's data
-        public void Load();
+        public void Load() { throw new NotImplementedException(); }
 
         // Delete the model
-        public void Delete();
+        public void Delete() { throw new NotImplementedException(); }
     }
 }
