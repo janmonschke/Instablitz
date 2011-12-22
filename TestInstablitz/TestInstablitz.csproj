@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="ConfigDataTest.cs" />
     <Compile Include="ConfigTest.cs" />
+    <Compile Include="InstapaperConnectorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

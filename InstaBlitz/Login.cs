@@ -23,6 +23,8 @@ namespace Instablitz
             htmlshizzlebrowser.Url = new Uri(appPath + "\\htmlshizzle\\oauth-signature-manizzle.htm");
         }
 
+        public WebBrowser GetBrowserElement() { return this.htmlshizzlebrowser; }
+
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://www.instapaper.com/user/register");
