@@ -13,6 +13,9 @@ namespace InstaBlitz.Models
         public delegate void BookmarksReceived(List<Bookmark> bookmarks);
         public event BookmarksReceived OnBookmarksReceived;
 
+        public delegate void FoldersReceived(List<Folder> folders);
+        public event FoldersReceived OnFoldersReceived;
+
         public Folder(InstapaperConnector con) : base(con)
         {
           
@@ -28,6 +31,12 @@ namespace InstaBlitz.Models
             bookmarks.Add(b1);
             bookmarks.Add(b2);
             OnBookmarksReceived(bookmarks);
+        }
+
+        public void GetFolders()
+        {
+            this.connector.GetFolderList();
+
         }
     }
 }

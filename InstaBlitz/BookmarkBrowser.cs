@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using Instablitz;
 using System.Net.NetworkInformation;
+using InstaBlitz.Models;
+using System.IO;
+using System.Reflection;
 
 namespace InstaBlitz
 {
@@ -16,7 +19,8 @@ namespace InstaBlitz
         public BookmarkBrowser()
         {
             InitializeComponent();
-           
+            string appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
+            theBrowser.Url = new Uri(appPath + "\\htmlshizzle\\oauth-signature-manizzle.htm");
         }
 
         public static bool IsConnected()
@@ -35,9 +39,18 @@ namespace InstaBlitz
             return pr.Status == IPStatus.Success;
         }
 
+        private InstapaperConnector connector = null;
+
+        private InstapaperConnector getConnector()
+        {
+            return this.connector == null ? new InstapaperConnector(new OAuthHelper(theBrowser)) : this.connector;
+        }
+
         private void displayData()
         {
             MessageBox.Show("User is authenticated, all systems working...finally load data");
+            Folder f = new Folder(getConnector());
+            getConnector().VerifyCredentials();
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
@@ -79,6 +92,11 @@ namespace InstaBlitz
         }
 
         private void BookmarkBrowser_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void theBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             ConfigData cd = Config.GetData();
             DialogResult dr;
