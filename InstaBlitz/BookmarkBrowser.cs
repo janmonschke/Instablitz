@@ -48,8 +48,12 @@ namespace InstaBlitz
 
         private void displayData()
         {
-            MessageBox.Show("User is authenticated, all systems working...finally load data");
+            //MessageBox.Show("User is authenticated, all systems working...finally load data");
             Folder f = new Folder(getConnector());
+            f.OnFoldersReceived += delegate(List<Folder> folders) {
+                Console.WriteLine("got themmmmm " + folders.Count);
+            };
+            //f.GetFolders();
             getConnector().VerifyCredentials();
         }
 

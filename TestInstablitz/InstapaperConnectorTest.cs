@@ -86,7 +86,7 @@ namespace TestInstablitz
                         foreach (Folder f in folders)
                             Assert.IsNotNull(f);
                 };
-                target.GetFolderList();
+                target.GetFolderList("https://instapaper.com/api/v1/folders/list");
             };
             
         }

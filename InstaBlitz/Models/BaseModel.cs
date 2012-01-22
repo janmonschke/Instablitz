@@ -10,7 +10,7 @@ namespace InstaBlitz.Models
 
     class BaseModel
     {
-        protected static String BaseUrl = "https://instapaper.com/api/v1/";
+        protected static String BaseUrl = "https://instapaper.com/api/1/";
         protected InstapaperConnector connector;
         public String Id;
         public String Title;

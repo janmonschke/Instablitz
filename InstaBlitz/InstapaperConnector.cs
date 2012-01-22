@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -133,13 +134,19 @@ namespace Instablitz
         private void __printResult(IAsyncResult result)
         {
             currentRequest.EndGetResponse(result);
+            
+            Console.WriteLine("----Response: " + readResult());
+            
+        }
+
+        private String readResult() {
             WebResponse res = currentRequest.GetResponse();
             Stream s = res.GetResponseStream();
             StreamReader sr2 = new StreamReader(s);
             String response = sr2.ReadToEnd();
-            Console.WriteLine("----Response: " + response);
             s.Close();
             sr2.Close();
+            return response;
         }
 
         public void VerifyCredentials()
@@ -151,7 +158,7 @@ namespace Instablitz
             // do the request
             try
             {
-                currentRequest.BeginGetResponse(new AsyncCallback(__printResult), null);
+                currentRequest.BeginGetResponse(new AsyncCallback(__verifyDone), null);
             }
             catch (WebException we)
             {
@@ -171,12 +178,49 @@ namespace Instablitz
                 OnOAuthFail("Wrong user/password combination.");
             }
         }
-        
+
+        private void __verifyDone(IAsyncResult asyn)
+        {
+            JsonParser p = new JsonParser(readResult());
+            var decoded = p.Decode();
+            Console.WriteLine(decoded.GetType() == typeof(System.Collections.ArrayList));
+            ArrayList arr = decoded as ArrayList;
+            Console.WriteLine(arr[0].GetType());
+            Dictionary<String, Object> vals = arr[0] as Dictionary<String, Object>;
+            foreach(String k in vals.Keys)
+                Console.WriteLine(k + " " + vals[k]);
+        }
+
         public delegate void FoldersReceived(List<Folder> folders);
         public event FoldersReceived OnFoldersReceived;
 
-        public void GetFolderList()
+        public void GetFolderList(String url)
         {
+
+            String[] scriptParams = { url };
+            createRequest(url, scriptParams);
+            Console.WriteLine(url);
+            // do the request
+            try
+            {
+                currentRequest.BeginGetResponse(new AsyncCallback(__receivedFolders), null);
+            }
+            catch (WebException we)
+            {
+                Console.WriteLine("========RESPONSE ERROR=========");
+
+                Stream s = we.Response.GetResponseStream();
+                StreamReader sr2 = new StreamReader(s);
+                Console.WriteLine(sr2.ReadToEnd());
+                sr2.Close();
+                s.Close();
+                Console.WriteLine("========EXCEPTION MESSAGE=========");
+                Console.WriteLine(we);
+                Console.WriteLine("========/RESPONSE ERROR=========");
+                
+            }
+
+
             List<Folder> folders = new List<Folder>();
             Folder f1 = new Folder(this);
             f1.Id = "1";
@@ -190,7 +234,19 @@ namespace Instablitz
             folders.Add(f1);
             folders.Add(f2);
             folders.Add(f3);
-            OnFoldersReceived(folders);
+            //OnFoldersReceived(folders);
+        }
+
+        private void __receivedFolders(IAsyncResult result)
+        {
+            currentRequest.EndGetResponse(result);
+            WebResponse res = currentRequest.GetResponse();
+            Stream s = res.GetResponseStream();
+            StreamReader sr2 = new StreamReader(s);
+            String response = sr2.ReadToEnd();
+            Console.WriteLine("response: " + response);
+            
+            //OnOAuthTokenReceived(oae);
         }
     } 
 

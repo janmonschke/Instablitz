@@ -8,7 +8,7 @@ namespace InstaBlitz.Models
 {
     class Folder : BaseModel
     {
-        protected static String BaseUrl = BaseModel.BaseUrl + "/folder";
+        protected static String BaseUrl = BaseModel.BaseUrl + "folder";
         
         public delegate void BookmarksReceived(List<Bookmark> bookmarks);
         public event BookmarksReceived OnBookmarksReceived;
@@ -35,7 +35,10 @@ namespace InstaBlitz.Models
 
         public void GetFolders()
         {
-            this.connector.GetFolderList();
+            this.connector.OnFoldersReceived += delegate(List<Folder> folders) { 
+                
+            };
+            this.connector.GetFolderList(BaseModel.BaseUrl + "folders/list");
 
         }
     }
