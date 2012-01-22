@@ -62,7 +62,7 @@ namespace Instablitz
                 Console.WriteLine(s);
                 
             OAuthSignedValues values = helper.signRequestLikeABoss(scriptParams);
-            String signature = System.Web.HttpUtility.UrlDecode(values.Signature).Replace(' ', '+');
+            String signature = System.Web.HttpUtility.UrlDecode(values.Signature).Replace(" ", "+");
             String NormalizedRequestParameters = values.NormalizedRequestParameters;
 
             Console.WriteLine("sig: " + signature);
