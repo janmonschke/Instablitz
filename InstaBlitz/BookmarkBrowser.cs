@@ -53,8 +53,8 @@ namespace InstaBlitz
             f.OnFoldersReceived += delegate(List<Folder> folders) {
                 Console.WriteLine("got themmmmm " + folders.Count);
             };
-            //f.GetFolders();
-            getConnector().VerifyCredentials();
+            f.GetFolders();
+            //getConnector().VerifyCredentials();
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
