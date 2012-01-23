@@ -38,7 +38,7 @@ namespace InstaBlitz.Models
             this.connector.OnFoldersReceived += delegate(List<Folder> folders) { 
                 // parse folder data
             };
-            this.connector.GetFolderList(BaseModel.BaseUrl + "folders/list");
+            this.connector.GetFolderList(BaseModel.BaseUrl + "bookmarks/list");
 
         }
     }

@@ -118,6 +118,36 @@ namespace InstaBlitz
             else
                 MessageBox.Show("offline mode");
         }
+
+        private void DeleteBookmarkButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+        }
+
+        private void LikeBookmarkButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer5_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+        }
+
+        private void LogoutButton_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
         
     }
 }
