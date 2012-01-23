@@ -79,14 +79,13 @@ namespace Instablitz
             currentRequest.ContentType = "application/x-www-form-urlencoded";
             currentRequest.ContentLength = body.Length;
             // write the request's body
-            Stream r = currentRequest.GetRequestStream();
-            StreamWriter sr = new StreamWriter(r);
+            StreamWriter sr = new StreamWriter(currentRequest.GetRequestStream());
             for (int i = 0; i < body.Length; i++)
             {
                 sr.Write(body[i]);
             }
             sr.Close();
-            r.Close();
+
             return currentRequest;
         }
 
@@ -179,7 +178,7 @@ namespace Instablitz
                 Console.WriteLine("========EXCEPTION MESSAGE=========");
                 Console.WriteLine(we);
                 Console.WriteLine("========/RESPONSE ERROR=========");
-                OnOAuthFail("Wrong user/password combination.");
+                readResult();
             }
         }
 
@@ -213,11 +212,11 @@ namespace Instablitz
             {
                 Console.WriteLine("========RESPONSE ERROR=========");
 
-                Stream s = we.Response.GetResponseStream();
-                StreamReader sr2 = new StreamReader(s);
-                Console.WriteLine(sr2.ReadToEnd());
+                StreamReader sr2 = new StreamReader(we.Response.GetResponseStream());
+                
+                MessageBox.Show(sr2.ReadToEnd());
                 sr2.Close();
-                s.Close();
+
                 Console.WriteLine("========EXCEPTION MESSAGE=========");
                 Console.WriteLine(we);
                 Console.WriteLine("========/RESPONSE ERROR=========");
