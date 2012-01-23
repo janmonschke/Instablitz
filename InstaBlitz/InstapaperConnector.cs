@@ -8,6 +8,7 @@ using System.Net;
 using System.IO;
 using System.Collections.Specialized;
 using System.Runtime.Remoting.Messaging;
+using System.Web;
 using InstaBlitz;
 using fastJSON;
 using InstaBlitz.Models;
@@ -62,7 +63,7 @@ namespace Instablitz
                 Console.WriteLine(s);
                 
             OAuthSignedValues values = helper.signRequestLikeABoss(scriptParams);
-            String signature = System.Web.HttpUtility.UrlDecode(values.Signature).Replace(" ", "+");
+            String signature = values.Signature;
             String NormalizedRequestParameters = values.NormalizedRequestParameters;
 
             Console.WriteLine("sig: " + signature);

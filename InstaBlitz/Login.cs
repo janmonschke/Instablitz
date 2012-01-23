@@ -55,7 +55,7 @@ namespace Instablitz
                 cd.oauth_token = args.OAuthToken;
                 cd.oauth_token_secret = args.OAuthTokenSecret;
                 Config.Write();
-                MessageBox.Show("Your Token has been created", "Success");
+                //MessageBox.Show("Your Token has been created", "Success");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             };
