@@ -198,9 +198,9 @@ namespace Instablitz
         public delegate void FoldersReceived(List<Folder> folders);
         public event FoldersReceived OnFoldersReceived;
 
-        public void GetFolderList(String url)
+        public void GetFolderList()
         {
-
+            String url = "https://www.instapaper.com/api/1/folders/list";
             String[] scriptParams = { url };
             createRequest(url, scriptParams);
             Console.WriteLine(url);
@@ -224,33 +224,26 @@ namespace Instablitz
                 
             }
 
-
-            List<Folder> folders = new List<Folder>();
-            Folder f1 = new Folder(this);
-            f1.Id = "1";
-            f1.Title = "First one";
-            Folder f2 = new Folder(this);
-            f2.Id = "2";
-            f2.Title = "Second folder";
-            Folder f3 = new Folder(this);
-            f3.Id = "3";
-            f3.Title = "Third and last folder";
-            folders.Add(f1);
-            folders.Add(f2);
-            folders.Add(f3);
-            //OnFoldersReceived(folders);
         }
 
         private void __receivedFolders(IAsyncResult result)
         {
-            currentRequest.EndGetResponse(result);
-            WebResponse res = currentRequest.GetResponse();
-            Stream s = res.GetResponseStream();
-            StreamReader sr2 = new StreamReader(s);
-            String response = sr2.ReadToEnd();
-            Console.WriteLine("response: " + response);
-            
-            //OnOAuthTokenReceived(oae);
+            String respResult = readResult();
+            List<Folder> folders = new List<Folder>();
+
+            JsonParser parser = new JsonParser(respResult);
+            var parsedFolderResult = parser.Decode();
+
+            ArrayList folderArray = parsedFolderResult as ArrayList;
+
+            foreach (Dictionary<String, Object> folder in folderArray)
+            {
+                Folder current = new Folder(this);
+                current.Id = folder["folder_id"] as String;
+                current.Title = folder["title"] as String;
+                folders.Add(current);
+            }
+            OnFoldersReceived(folders);
         }
     } 
 
