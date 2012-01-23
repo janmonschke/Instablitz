@@ -57,7 +57,8 @@ namespace InstaBlitz
             f.OnBookmarksReceived += delegate(List<Bookmark> bookmarks)
             {
                 Console.WriteLine("received " + bookmarks.Count);
-                
+                foreach(Bookmark b in bookmarks)
+                    Console.WriteLine("Title: " + b.Title + " Starred? " + b.Starred);
             };
 
             f.OnFoldersReceived += delegate(List<Folder> folders) {

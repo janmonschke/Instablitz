@@ -272,6 +272,10 @@ namespace Instablitz
                 if ((bookmark["type"] as String).Equals("bookmark"))
                 {
                     Bookmark current = new Bookmark(this);
+                    current.Id = (String) bookmark["bookmark_id"];
+                    current.Title = (String)bookmark["title"];
+                    current.Url = (String)bookmark["url"];
+                    current.Starred = ((String)bookmark["starred"]).Equals("1");
                     bookmarks.Add(current);
                 }
                 
