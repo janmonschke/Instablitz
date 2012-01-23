@@ -150,6 +150,7 @@ namespace Instablitz
             String response = sr2.ReadToEnd();
             s.Close();
             sr2.Close();
+            Console.WriteLine(response);
             return response;
         }
 
@@ -195,6 +196,27 @@ namespace Instablitz
                 Console.WriteLine(k + " " + vals[k]);
         }
 
+        private void callApi(String url, String[] parameters, AsyncCallback callback)
+        {
+            createRequest(url, parameters);
+            
+            // do the request
+            try
+            {
+                currentRequest.BeginGetResponse(callback, null);
+            }
+            catch (WebException we)
+            {
+                Console.WriteLine("========RESPONSE ERROR=========");
+                StreamReader sr2 = new StreamReader(we.Response.GetResponseStream());
+                MessageBox.Show(sr2.ReadToEnd());
+                sr2.Close();
+                Console.WriteLine("========EXCEPTION MESSAGE=========");
+                Console.WriteLine(we);
+                Console.WriteLine("========/RESPONSE ERROR=========");
+            }
+        }
+
         public delegate void FoldersReceived(List<Folder> folders);
         public event FoldersReceived OnFoldersReceived;
 
@@ -202,28 +224,7 @@ namespace Instablitz
         {
             String url = "https://www.instapaper.com/api/1/folders/list";
             String[] scriptParams = { url };
-            createRequest(url, scriptParams);
-            Console.WriteLine(url);
-            // do the request
-            try
-            {
-                currentRequest.BeginGetResponse(new AsyncCallback(__receivedFolders), null);
-            }
-            catch (WebException we)
-            {
-                Console.WriteLine("========RESPONSE ERROR=========");
-
-                StreamReader sr2 = new StreamReader(we.Response.GetResponseStream());
-                
-                MessageBox.Show(sr2.ReadToEnd());
-                sr2.Close();
-
-                Console.WriteLine("========EXCEPTION MESSAGE=========");
-                Console.WriteLine(we);
-                Console.WriteLine("========/RESPONSE ERROR=========");
-                
-            }
-
+            callApi(url, scriptParams, new AsyncCallback(__receivedFolders));
         }
 
         private void __receivedFolders(IAsyncResult result)
@@ -244,6 +245,38 @@ namespace Instablitz
                 folders.Add(current);
             }
             OnFoldersReceived(folders);
+        }
+
+        public delegate void BookmarksReceived(List<Bookmark> bookmarks);
+        public event BookmarksReceived OnBookmarksReceived;
+
+        public void GetBookmarks(String folderID)
+        {
+            String url = "https://www.instapaper.com/api/1/bookmarks/list";
+            String[] scriptParams = { url, "folder_id", folderID };
+            callApi(url, scriptParams, new AsyncCallback(__receivedBookmarks));
+        }
+
+        private void __receivedBookmarks(IAsyncResult result)
+        {
+            String respResult = readResult();
+            List<Bookmark> bookmarks = new List<Bookmark>();
+
+            JsonParser parser = new JsonParser(respResult);
+            var parsedBookmarksResult = parser.Decode();
+
+            ArrayList bookmarkArray = parsedBookmarksResult as ArrayList;
+
+            foreach (Dictionary<String, Object> bookmark in bookmarkArray)
+            {
+                if ((bookmark["type"] as String).Equals("bookmark"))
+                {
+                    Bookmark current = new Bookmark(this);
+                    bookmarks.Add(current);
+                }
+                
+            }
+            OnBookmarksReceived(bookmarks);
         }
     } 
 

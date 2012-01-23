@@ -8,6 +8,10 @@ namespace InstaBlitz.Models
 {
     class Folder : BaseModel
     {
+        public const String STARRED = "starred";
+        public const String UNREAD = "unread";
+        public const String ARCHIVE = "archive";
+
         protected static String BaseUrl = BaseModel.BaseUrl + "folder";
         
         public delegate void BookmarksReceived(List<Bookmark> bookmarks);
@@ -23,14 +27,11 @@ namespace InstaBlitz.Models
 
         public void GetBookmarks()
         {
-            List<Bookmark> bookmarks = new List<Bookmark>();
-            Bookmark b1 = new Bookmark(this.connector);
-            b1.HtmlText = "<p>Tesssssssttt</p><p>Lorem the fuck !!!</p>";
-            Bookmark b2 = new Bookmark(this.connector);
-            b2.HtmlText = "<h1>Tesssssssttt 2222222</h1><p>Lorem the fuck !!!</p>";
-            bookmarks.Add(b1);
-            bookmarks.Add(b2);
-            OnBookmarksReceived(bookmarks);
+            this.connector.OnBookmarksReceived += delegate(List<Bookmark> bookmarks)
+            {
+                OnBookmarksReceived(bookmarks);
+            };
+            this.connector.GetBookmarks(this.Id);
         }
 
         public void GetFolders()
