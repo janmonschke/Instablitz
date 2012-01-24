@@ -76,26 +76,6 @@ namespace InstaBlitz
             //getConnector().VerifyCredentials();
         }
 
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BookmarkList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FolderList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void LogoutButton_Click(object sender, EventArgs e)
         {
             // ask the user if he really wants to logout
@@ -112,11 +92,6 @@ namespace InstaBlitz
                 else
                     this.displayData();
             }
-        }
-
-        private void BookmarkBrowser_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void theBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -138,34 +113,43 @@ namespace InstaBlitz
                 MessageBox.Show("offline mode");
         }
 
-        private void DeleteBookmarkButton_Click(object sender, EventArgs e)
+        private void FolderList_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-
+            // clear bookmark view
+            // get folder_id
+            // load bookmarks for said folder_id
+            // display them in the bookmark list
         }
 
-        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        private void BookmarkList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // clear bookmark view
+            // get bookmark_id
+            // load bookmark for said bookmark_id
+            // display it in the bookmark view
+        }
 
+        private void ArchiveButton_Click(object sender, EventArgs e)
+        {
+            // send bookmark request
+            // reload gui with empty bookmark view
         }
 
         private void LikeBookmarkButton_Click(object sender, EventArgs e)
         {
-
+            // check if bookmark is starred
+            // if bookmark is stared
+            //      unstar it
+            //      change button text to star
+            // else
+            //      star the bookmark
+            //      change button text to unstar
         }
 
-        private void splitContainer5_SplitterMoved(object sender, SplitterEventArgs e)
+        private void DeleteBookmarkButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void LogoutButton_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            // send delete request
+            // clear bookmark view
         }
         
     }
