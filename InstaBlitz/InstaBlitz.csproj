@@ -96,6 +96,7 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Bookmark.cs" />
     <Compile Include="Models\Folder.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="OAuthHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

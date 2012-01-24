@@ -67,11 +67,15 @@ namespace InstaBlitz
                 bookmarks[0].Star();
             };
 
-            f.OnFoldersReceived += delegate(List<Folder> folders) {
-                Console.WriteLine("got themmmmm " + folders.Count);
+            User user = new User(getConnector());
+
+            user.OnFoldersReceived += delegate() {
+                Console.WriteLine("got themmmmm " + user.Folders.Count);
             };
+
+            user.GetFolders();
             
-            f.GetBookmarks();
+            //f.GetBookmarks();
 
             //getConnector().VerifyCredentials();
         }
