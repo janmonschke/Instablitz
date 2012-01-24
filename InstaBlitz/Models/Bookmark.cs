@@ -42,5 +42,15 @@ namespace InstaBlitz.Models
             this.connector.UnStarBookmark(this.Id);
         }
 
+        public delegate void TextReceived(String text);
+        public event TextReceived OnTextReceived;
+
+        public void GetText()
+        {
+            this.connector.OnBookmarkTextReceived += delegate(String text) {
+                this.OnTextReceived(text);
+            };
+            this.connector.GetBookmarkText(this.Id);
+        }
     }
 }

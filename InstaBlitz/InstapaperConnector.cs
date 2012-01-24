@@ -304,6 +304,21 @@ namespace Instablitz
         {
             OnStarChanged();
         }
+
+        public delegate void BookmarkTextReceived(String text);
+        public event BookmarkTextReceived OnBookmarkTextReceived;
+
+        public void GetBookmarkText(String bookmarkId)
+        {
+            String url = "https://www.instapaper.com/api/1/bookmarks/get_text";
+            String[] scriptParams = { url, "bookmark_id", bookmarkId };
+            callApi(url, scriptParams, new AsyncCallback(__textReceived));    
+        }
+
+        private void __textReceived(IAsyncResult result)
+        {
+            OnBookmarkTextReceived(readResult());
+        }
     } 
 
     

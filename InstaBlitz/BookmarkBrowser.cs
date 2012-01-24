@@ -59,6 +59,10 @@ namespace InstaBlitz
                     Console.WriteLine("Title: " + b.Title + " Starred? " + b.Starred);
                 bookmarks[0].OnStarChanged += delegate() {
                     Console.WriteLine("starred");
+                    bookmarks[0].OnTextReceived += delegate(String text) {
+                        Console.WriteLine(text);
+                    };
+                    bookmarks[0].GetText();
                 };
                 bookmarks[0].Star();
             };
