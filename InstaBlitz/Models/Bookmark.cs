@@ -20,5 +20,27 @@ namespace InstaBlitz.Models
             this.HtmlText = "";
         }
 
+        public delegate void StarSuccess();
+        public event StarSuccess OnStarChanged;
+
+        public void Star()
+        {
+            this.connector.OnStarChanged += delegate() {
+                this.Starred = true;
+                this.OnStarChanged();    
+            };
+            this.connector.StarBookmark(this.Id);
+        }
+
+        public void UnStar()
+        {
+            this.connector.OnStarChanged += delegate()
+            {
+                this.Starred = false;
+                this.OnStarChanged();
+            };
+            this.connector.UnStarBookmark(this.Id);
+        }
+
     }
 }

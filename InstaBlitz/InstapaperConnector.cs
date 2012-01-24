@@ -282,6 +282,28 @@ namespace Instablitz
             }
             OnBookmarksReceived(bookmarks);
         }
+
+        public delegate void StarSuccess();
+        public event StarSuccess OnStarChanged;
+
+        public void StarBookmark(String bookmarkId)
+        {
+            String url = "https://www.instapaper.com/api/1/bookmarks/star";
+            String[] scriptParams = { url, "bookmark_id", bookmarkId };
+            callApi(url, scriptParams, new AsyncCallback(__starFinished));
+        }
+
+        public void UnStarBookmark(String bookmarkId)
+        {
+            String url = "https://www.instapaper.com/api/1/bookmarks/unstar";
+            String[] scriptParams = { url, "bookmark_id", bookmarkId };
+            callApi(url, scriptParams, new AsyncCallback(__starFinished));
+        }
+
+        private void __starFinished(IAsyncResult result)
+        {
+            OnStarChanged();
+        }
     } 
 
     

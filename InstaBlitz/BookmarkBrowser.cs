@@ -49,8 +49,6 @@ namespace InstaBlitz
         private void displayData()
         {
             
-
-            
             Folder f = new Folder(getConnector());
             f.Id = Folder.UNREAD;
 
@@ -59,6 +57,10 @@ namespace InstaBlitz
                 Console.WriteLine("received " + bookmarks.Count);
                 foreach(Bookmark b in bookmarks)
                     Console.WriteLine("Title: " + b.Title + " Starred? " + b.Starred);
+                bookmarks[0].OnStarChanged += delegate() {
+                    Console.WriteLine("starred");
+                };
+                bookmarks[0].Star();
             };
 
             f.OnFoldersReceived += delegate(List<Folder> folders) {
