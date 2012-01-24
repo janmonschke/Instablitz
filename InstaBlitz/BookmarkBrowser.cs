@@ -70,7 +70,13 @@ namespace InstaBlitz
             User user = new User(getConnector());
 
             user.OnFoldersReceived += delegate() {
-                Console.WriteLine("got themmmmm " + user.Folders.Count);
+                for(int i=0; i < user.Folders.Count; i++)
+                {
+                    Folder folder = user.Folders[i];
+                    FolderList.Items.Add(folder.Title, folder.Id);
+
+                }
+                //Console.WriteLine("got themmmmm " + user.Folders.Count);
             };
 
             user.GetFolders();
