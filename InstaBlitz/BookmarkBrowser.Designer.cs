@@ -77,7 +77,6 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.splitContainer4);
-            this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
             // 
             // splitContainer1.Panel2
             // 
@@ -85,7 +84,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(915, 436);
             this.splitContainer1.SplitterDistance = 138;
             this.splitContainer1.TabIndex = 0;
-            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // splitContainer4
             // 
@@ -126,6 +124,7 @@
             this.FolderList.TabIndex = 2;
             this.FolderList.UseCompatibleStateImageBehavior = false;
             this.FolderList.View = System.Windows.Forms.View.List;
+            this.FolderList.SelectedIndexChanged += new System.EventHandler(this.FolderList_SelectedIndexChanged_1);
             // 
             // splitContainer5
             // 
@@ -144,7 +143,6 @@
             this.splitContainer5.Size = new System.Drawing.Size(138, 86);
             this.splitContainer5.SplitterDistance = 57;
             this.splitContainer5.TabIndex = 0;
-            this.splitContainer5.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer5_SplitterMoved);
             // 
             // Username
             // 
@@ -154,7 +152,7 @@
             this.Username.Size = new System.Drawing.Size(53, 13);
             this.Username.TabIndex = 0;
             this.Username.Text = "username";
-            this.Username.Click += new System.EventHandler(this.label1_Click);
+            this.Username.Click += new System.EventHandler(this.Username_Click);
             // 
             // LogoutButton
             // 
@@ -165,7 +163,6 @@
             this.LogoutButton.TabIndex = 2;
             this.LogoutButton.Text = "Log out";
             this.LogoutButton.UseVisualStyleBackColor = true;
-            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click_1);
             // 
             // splitContainer2
             // 
@@ -233,6 +230,7 @@
             this.theBrowser.Location = new System.Drawing.Point(150, 0);
             this.theBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.theBrowser.Name = "theBrowser";
+            this.theBrowser.ScrollBarsEnabled = false;
             this.theBrowser.Size = new System.Drawing.Size(277, 25);
             this.theBrowser.TabIndex = 3;
             this.theBrowser.Visible = false;
@@ -246,7 +244,7 @@
             this.LikeBookmarkButton.Name = "LikeBookmarkButton";
             this.LikeBookmarkButton.Size = new System.Drawing.Size(75, 25);
             this.LikeBookmarkButton.TabIndex = 1;
-            this.LikeBookmarkButton.Text = "Like";
+            this.LikeBookmarkButton.Text = "Star";
             this.LikeBookmarkButton.UseVisualStyleBackColor = true;
             this.LikeBookmarkButton.Click += new System.EventHandler(this.LikeBookmarkButton_Click);
             // 
@@ -272,6 +270,7 @@
             this.ArchiveButton.TabIndex = 2;
             this.ArchiveButton.Text = "Archive";
             this.ArchiveButton.UseVisualStyleBackColor = true;
+            this.ArchiveButton.Click += new System.EventHandler(this.ArchiveButton_Click);
             // 
             // BookmarkBrowser
             // 
@@ -282,7 +281,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "BookmarkBrowser";
             this.Text = "Instablitz";
-            this.Load += new System.EventHandler(this.BookmarkBrowser_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
