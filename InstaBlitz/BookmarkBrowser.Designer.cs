@@ -152,7 +152,6 @@
             this.Username.Size = new System.Drawing.Size(53, 13);
             this.Username.TabIndex = 0;
             this.Username.Text = "username";
-            this.Username.Click += new System.EventHandler(this.Username_Click);
             // 
             // LogoutButton
             // 
@@ -163,6 +162,7 @@
             this.LogoutButton.TabIndex = 2;
             this.LogoutButton.Text = "Log out";
             this.LogoutButton.UseVisualStyleBackColor = true;
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // splitContainer2
             // 
