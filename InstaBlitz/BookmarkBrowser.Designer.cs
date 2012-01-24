@@ -246,7 +246,7 @@
             this.LikeBookmarkButton.Name = "LikeBookmarkButton";
             this.LikeBookmarkButton.Size = new System.Drawing.Size(75, 25);
             this.LikeBookmarkButton.TabIndex = 1;
-            this.LikeBookmarkButton.Text = "Like";
+            this.LikeBookmarkButton.Text = "Star";
             this.LikeBookmarkButton.UseVisualStyleBackColor = true;
             this.LikeBookmarkButton.Click += new System.EventHandler(this.LikeBookmarkButton_Click);
             // 
