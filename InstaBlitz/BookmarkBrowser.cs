@@ -49,24 +49,6 @@ namespace InstaBlitz
         private void displayData()
         {
             
-            Folder f = new Folder(getConnector());
-            f.Id = Folder.UNREAD;
-
-            f.OnBookmarksReceived += delegate(List<Bookmark> bookmarks)
-            {
-                Console.WriteLine("received " + bookmarks.Count);
-                foreach(Bookmark b in bookmarks)
-                    Console.WriteLine("Title: " + b.Title + " Starred? " + b.Starred);
-                bookmarks[0].OnStarChanged += delegate() {
-                    Console.WriteLine("starred");
-                    bookmarks[0].OnTextReceived += delegate(String text) {
-                        Console.WriteLine(text);
-                    };
-                    bookmarks[0].GetText();
-                };
-                bookmarks[0].Star();
-            };
-
             User user = new User(getConnector());
 
             user.OnFoldersReceived += delegate() {
@@ -76,6 +58,10 @@ namespace InstaBlitz
                     FolderList.Items.Add(folder.Title, folder.Id);
 
                 }
+                // load bookmarks from default folder
+                loadFolder("unread");
+                // select default folder
+                FolderList.Items[0].Selected = true;
                 //Console.WriteLine("got themmmmm " + user.Folders.Count);
             };
 
@@ -84,6 +70,42 @@ namespace InstaBlitz
             //f.GetBookmarks();
 
             //getConnector().VerifyCredentials();
+        }
+
+        private void loadFolder(String folder_id)
+        {
+            Folder f = new Folder(getConnector());
+            f.Id = folder_id;
+
+            f.OnBookmarksReceived += renderBookmarks;
+
+            f.GetBookmarks();
+        }
+
+        private void renderBookmarks(List<Bookmark> bookmarks)
+        {
+            //Console.WriteLine("received " + bookmarks.Count);
+            //foreach(Bookmark b in bookmarks)
+            //    Console.WriteLine("Title: " + b.Title + " Starred? " + b.Starred);
+            /*bookmarks[0].OnStarChanged += delegate() {
+                Console.WriteLine("starred");
+                bookmarks[0].OnTextReceived += delegate(String text) {
+                    Console.WriteLine(text);
+                };
+                bookmarks[0].GetText();
+            };*/
+            //bookmarks[0].Star();
+            for (int i = 0; i < bookmarks.Count; i++)
+            {
+                Bookmark bookmark = bookmarks[i];
+                BookmarkList.Items.Add(bookmark.Title, bookmark.Id);
+
+            }
+        }
+
+        private void loadBookmark(String bookmark_id)
+        {
+            
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
@@ -125,7 +147,8 @@ namespace InstaBlitz
 
         private void FolderList_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            // clear bookmark view
+            // clear displayed bookmark
+            Console.WriteLine("selectedIndex: " + FolderList.SelectedItems);
             // get folder_id
             // load bookmarks for said folder_id
             // display them in the bookmark list
@@ -134,6 +157,7 @@ namespace InstaBlitz
         private void BookmarkList_SelectedIndexChanged(object sender, EventArgs e)
         {
             // clear bookmark view
+            Console.WriteLine("selected: " + BookmarkList.SelectedItems[0].ToString());
             // get bookmark_id
             // load bookmark for said bookmark_id
             // display it in the bookmark view
