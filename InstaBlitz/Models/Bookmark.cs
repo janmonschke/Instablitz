@@ -18,21 +18,20 @@ namespace InstaBlitz.Models
             this.HtmlText = "";
         }
 
-        private void starred(IAsyncResult res)
-        {
-            this.Starred = true;
-            this.currentCallback.Invoke(res);
-        }
-
         public void Star(AsyncCallback callback)
         {
-            this.currentCallback = callback;
-            this.connector.StarBookmark(this, callback);
+            this.connector.StarBookmark(this, delegate(IAsyncResult res){
+                this.Starred = true;
+                callback.Invoke(res);
+            });
         }
 
         public void UnStar(AsyncCallback callback)
         {
-            this.connector.UnStarBookmark(this, callback);
+            this.connector.UnStarBookmark(this, delegate(IAsyncResult res){
+                this.Starred = false;
+                callback.Invoke(res);
+            });
         }
 
         public void GetText(AsyncCallback callback)

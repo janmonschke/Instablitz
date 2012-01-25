@@ -12,7 +12,6 @@ namespace InstaBlitz.Models
     {
         protected static String BaseUrl = "https://www.instapaper.com/api/1/";
         protected InstapaperConnector connector;
-        protected AsyncCallback currentCallback;
         public String Id;
         public String Title;
 
