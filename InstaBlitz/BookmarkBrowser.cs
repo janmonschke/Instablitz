@@ -57,7 +57,7 @@ namespace InstaBlitz
                 {
                     Folder folder = user.Folders[i];
                     FolderList.Items.Add(folder.Title);
-
+                    Console.WriteLine("Adding Folder: " + folder.Title);
                 }
                 // load bookmarks from default folder
                 loadFolder("unread");
@@ -98,14 +98,14 @@ namespace InstaBlitz
             for (int i = 0; i < bookmarks.Count; i++)
             {
                 Bookmark bookmark = bookmarks[i];
-                BookmarkList.Items.Add(bookmark.Title, bookmark.Id);
-
+                BookmarkList.Items.Add(bookmark.Title);
+                Console.WriteLine("Adding Bookmark: " + bookmark.Title);
             }
         }
 
         private void loadBookmark(String bookmark_id)
         {
-            
+            Console.WriteLine("load bookmark_id: " + bookmark_id);
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
