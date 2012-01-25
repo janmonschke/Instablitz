@@ -114,6 +114,7 @@ namespace InstaBlitz
                 Console.WriteLine("bookmark text loaded");
                 BookmarkView.DocumentText = text;
             };
+            currentBookmarks[index].GetText();
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
