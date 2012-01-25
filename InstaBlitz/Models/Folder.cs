@@ -12,23 +12,16 @@ namespace InstaBlitz.Models
         public const String UNREAD = "unread";
         public const String ARCHIVE = "archive";
 
-        protected static String BaseUrl = BaseModel.BaseUrl + "folder";
-        
-        public delegate void BookmarksReceived(List<Bookmark> bookmarks);
-        public event BookmarksReceived OnBookmarksReceived;
+        public List<Bookmark> Bookmarks;
 
         public Folder(InstapaperConnector con) : base(con)
         {
-          
+          this.Bookmarks = new List<Bookmark>();
         }
 
-        public void GetBookmarks()
+        public void GetBookmarks(AsyncCallback callback)
         {
-            this.connector.OnBookmarksReceived += delegate(List<Bookmark> bookmarks)
-            {
-                OnBookmarksReceived(bookmarks);
-            };
-            this.connector.GetBookmarks(this.Id);
+            this.connector.GetBookmarks(this, callback);
         }
     }
 }

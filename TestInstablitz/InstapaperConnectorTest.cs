@@ -79,14 +79,15 @@ namespace TestInstablitz
             wb.DocumentCompleted += delegate (Object sender, WebBrowserDocumentCompletedEventArgs args){
                 OAuthHelper h = new OAuthHelper(wb); // TODO: Passenden Wert initialisieren
                 InstapaperConnector target = new InstapaperConnector(h); // TODO: Passenden Wert initialisieren
-                target.OnFoldersReceived += delegate(List<Folder> folders) {
+                User user = new User(target);
+                target.GetFolderList(user, delegate(IAsyncResult result)
+                {
                     // Should return an empty List in case of zero folders
-                    Console.WriteLine(folders);
-                    if(folders.Capacity > 0)
-                        foreach (Folder f in folders)
+                    Console.WriteLine(user.Folders);
+                    if (user.Folders.Capacity > 0)
+                        foreach (Folder f in user.Folders)
                             Assert.IsNotNull(f);
-                };
-                target.GetFolderList();
+                });
             };
             
         }

@@ -9,8 +9,6 @@ namespace InstaBlitz.Models
     class Bookmark : BaseModel
     {
         public String HtmlText;
-        public String Id;
-        public String Title;
         public String Url;
         public String Description;
         public Boolean Starred;
@@ -20,37 +18,26 @@ namespace InstaBlitz.Models
             this.HtmlText = "";
         }
 
-        public delegate void StarSuccess();
-        public event StarSuccess OnStarChanged;
-
-        public void Star()
+        private void starred(IAsyncResult res)
         {
-            this.connector.OnStarChanged += delegate() {
-                this.Starred = true;
-                this.OnStarChanged();    
-            };
-            this.connector.StarBookmark(this.Id);
+            this.Starred = true;
+            this.currentCallback.Invoke(res);
         }
 
-        public void UnStar()
+        public void Star(AsyncCallback callback)
         {
-            this.connector.OnStarChanged += delegate()
-            {
-                this.Starred = false;
-                this.OnStarChanged();
-            };
-            this.connector.UnStarBookmark(this.Id);
+            this.currentCallback = callback;
+            this.connector.StarBookmark(this, callback);
         }
 
-        public delegate void TextReceived(String text);
-        public event TextReceived OnTextReceived;
-
-        public void GetText()
+        public void UnStar(AsyncCallback callback)
         {
-            this.connector.OnBookmarkTextReceived += delegate(String text) {
-                this.OnTextReceived(text);
-            };
-            this.connector.GetBookmarkText(this.Id);
+            this.connector.UnStarBookmark(this, callback);
+        }
+
+        public void GetText(AsyncCallback callback)
+        {
+            this.connector.GetBookmarkText(this, callback);
         }
     }
 }

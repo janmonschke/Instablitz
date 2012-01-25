@@ -53,7 +53,7 @@ namespace InstaBlitz
         {
             user = new User(getConnector());
 
-            user.OnFoldersReceived += delegate() {
+            user.GetFolders(delegate(IAsyncResult res) {
                 for(int i=0; i < user.Folders.Count; i++)
                 {
                     Folder folder = user.Folders[i];
@@ -64,9 +64,7 @@ namespace InstaBlitz
                 // loadFolder("unread");
                 // select default folder
                 FolderList.Items[0].Selected = true;
-            };
-
-            user.GetFolders();
+            });
         }
 
         private void loadFolder(String folder_id)
@@ -74,48 +72,34 @@ namespace InstaBlitz
             Folder f = new Folder(getConnector());
             f.Id = folder_id;
 
-            f.OnBookmarksReceived += renderBookmarks;
+            f.GetBookmarks(delegate(IAsyncResult res) {
+                BookmarkList.Clear();
+                
+                for (int i = 0; i < f.Bookmarks.Count; i++)
+                {
+                    Bookmark bookmark = f.Bookmarks[i];
+                    BookmarkList.Items.Add(bookmark.Title);
+                    Console.WriteLine("Adding Bookmark: " + bookmark.Title);
+                }
 
-            f.GetBookmarks();
+                currentBookmarks = f.Bookmarks;
+            });
         }
 
-        private void renderBookmarks(List<Bookmark> bookmarks)
-        {
-            //Console.WriteLine("received " + bookmarks.Count);
-            //foreach(Bookmark b in bookmarks)
-            //    Console.WriteLine("Title: " + b.Title + " Starred? " + b.Starred);
-            /*bookmarks[0].OnStarChanged += delegate() {
-                Console.WriteLine("starred");
-                bookmarks[0].OnTextReceived += delegate(String text) {
-                    Console.WriteLine(text);
-                };
-                bookmarks[0].GetText();
-            };*/
-            //bookmarks[0].Star();
-            // clear bookmark list
-
-            BookmarkList.Clear();
-            
-            for (int i = 0; i < bookmarks.Count; i++)
-            {
-                Bookmark bookmark = bookmarks[i];
-                BookmarkList.Items.Add(bookmark.Title);
-                Console.WriteLine("Adding Bookmark: " + bookmark.Title);
-            }
-
-            currentBookmarks = bookmarks;
-        }
+        Bookmark currentlyVisibleBookmark = null;
 
         private void loadBookmark(int index)
         {
             Console.WriteLine("load bookmark index: " + index);
-            currentBookmarks[index].OnTextReceived += delegate(String text)
+            currentlyVisibleBookmark = currentBookmarks[index];
+            
+            currentlyVisibleBookmark.GetText(delegate(IAsyncResult res)
             {
                 Console.WriteLine("bookmark text loaded");
-                BookmarkView.DocumentText = text;
+                BookmarkView.DocumentText = currentlyVisibleBookmark.HtmlText;
                 BookmarkView.Select();
-            };
-            currentBookmarks[index].GetText();
+                StarBookmarkButton.Text = currentlyVisibleBookmark.Starred ? "Unstar" : "Star";
+            });
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
@@ -167,6 +151,13 @@ namespace InstaBlitz
                 String curr = user.Folders[index].Id;
                 loadFolder(curr);
             }
+            clearBookmarkView();
+        }
+
+        private void clearBookmarkView()
+        {
+            BookmarkView.DocumentText = "";
+            currentlyVisibleBookmark = null;
         }
 
         private void BookmarkList_SelectedIndexChanged(object sender, EventArgs e)
@@ -190,8 +181,31 @@ namespace InstaBlitz
             // reload gui with empty bookmark view
         }
 
-        private void LikeBookmarkButton_Click(object sender, EventArgs e)
+        private void starred(IAsyncResult res) { StarBookmarkButton.Text = "Unstar"; }
+
+        private void StarBookmarkButton_Click(object sender, EventArgs e)
         {
+            if (currentlyVisibleBookmark != null)
+            {
+                if (currentlyVisibleBookmark.Starred)
+                {
+                    
+                    currentlyVisibleBookmark.UnStar(delegate(IAsyncResult res)
+                    {
+                        StarBookmarkButton.Text = "Star";
+                    });
+                }
+                else
+                {
+                    currentlyVisibleBookmark.Star(delegate(IAsyncResult res)
+                    {
+                        StarBookmarkButton.Text = "Unstar";
+                    });
+                }
+            }
+            else
+                MessageBox.Show("You need to select a bookmark in order to star it!");
+
             // check if bookmark is starred
             // if bookmark is stared
             //      unstar it

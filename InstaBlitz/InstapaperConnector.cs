@@ -217,107 +217,110 @@ namespace Instablitz
             }
         }
 
-        public delegate void FoldersReceived(List<Folder> folders);
-        public event FoldersReceived OnFoldersReceived;
-
-        public void GetFolderList()
+        public void GetFolderList(User user, AsyncCallback callback)
         {
             String url = "https://www.instapaper.com/api/1/folders/list";
             String[] scriptParams = { url };
-            callApi(url, scriptParams, new AsyncCallback(__receivedFolders));
+            callApi(url, scriptParams, delegate(IAsyncResult result){
+                String respResult = readResult();
+                List<Folder> folders = new List<Folder>();
+
+                // manually add the predefined folders
+                Folder unread = new Folder(this);
+                unread.Id = Folder.UNREAD;
+                unread.Title = "Unread";
+                Folder starred = new Folder(this);
+                starred.Id = Folder.STARRED;
+                starred.Title = "Starred";
+                Folder archive = new Folder(this);
+                archive.Id = Folder.ARCHIVE;
+                archive.Title = "Archive";
+                folders.Add(unread);
+                folders.Add(starred);
+                folders.Add(archive);
+
+                JsonParser parser = new JsonParser(respResult);
+                var parsedFolderResult = parser.Decode();
+
+                ArrayList folderArray = parsedFolderResult as ArrayList;
+
+                foreach (Dictionary<String, Object> folder in folderArray)
+                {
+                    Folder current = new Folder(this);
+                    current.Id = folder["folder_id"] as String;
+                    current.Title = folder["title"] as String;
+                    folders.Add(current);
+                }
+
+                user.Folders = folders;
+                callback.Invoke(result);
+            });
         }
 
-        private void __receivedFolders(IAsyncResult result)
-        {
-            String respResult = readResult();
-            List<Folder> folders = new List<Folder>();
 
-            JsonParser parser = new JsonParser(respResult);
-            var parsedFolderResult = parser.Decode();
-
-            ArrayList folderArray = parsedFolderResult as ArrayList;
-
-            foreach (Dictionary<String, Object> folder in folderArray)
-            {
-                Folder current = new Folder(this);
-                current.Id = folder["folder_id"] as String;
-                current.Title = folder["title"] as String;
-                folders.Add(current);
-            }
-            OnFoldersReceived(folders);
-        }
-
-        public delegate void BookmarksReceived(List<Bookmark> bookmarks);
-        public event BookmarksReceived OnBookmarksReceived;
-
-        public void GetBookmarks(String folderID)
+        public void GetBookmarks(Folder folder, AsyncCallback callback)
         {
             String url = "https://www.instapaper.com/api/1/bookmarks/list";
-            String[] scriptParams = { url, "folder_id", folderID };
-            callApi(url, scriptParams, new AsyncCallback(__receivedBookmarks));
-        }
-
-        private void __receivedBookmarks(IAsyncResult result)
-        {
-            String respResult = readResult();
-            List<Bookmark> bookmarks = new List<Bookmark>();
-
-            JsonParser parser = new JsonParser(respResult);
-            var parsedBookmarksResult = parser.Decode();
-
-            ArrayList bookmarkArray = parsedBookmarksResult as ArrayList;
-
-            foreach (Dictionary<String, Object> bookmark in bookmarkArray)
+            String[] scriptParams = { url, "folder_id", folder.Id };
+            callApi(url, scriptParams, new AsyncCallback(delegate(IAsyncResult res)
             {
-                if ((bookmark["type"] as String).Equals("bookmark"))
+                String respResult = readResult();
+                List<Bookmark> bookmarks = new List<Bookmark>();
+
+                JsonParser parser = new JsonParser(respResult);
+                var parsedBookmarksResult = parser.Decode();
+
+                ArrayList bookmarkArray = parsedBookmarksResult as ArrayList;
+
+                foreach (Dictionary<String, Object> bookmark in bookmarkArray)
                 {
-                    Bookmark current = new Bookmark(this);
-                    current.Id = (String) bookmark["bookmark_id"];
-                    current.Title = (String)bookmark["title"];
-                    current.Url = (String)bookmark["url"];
-                    current.Starred = ((String)bookmark["starred"]).Equals("1");
-                    bookmarks.Add(current);
+                    if ((bookmark["type"] as String).Equals("bookmark"))
+                    {
+                        Bookmark current = new Bookmark(this);
+                        current.Id = (String)bookmark["bookmark_id"];
+                        current.Title = (String)bookmark["title"];
+                        current.Url = (String)bookmark["url"];
+                        current.Starred = ((String)bookmark["starred"]).Equals("1");
+                        bookmarks.Add(current);
+                    }
+
                 }
-                
-            }
-            OnBookmarksReceived(bookmarks);
+
+                folder.Bookmarks = bookmarks;
+                callback.Invoke(res);
+            }));
         }
 
-        public delegate void StarSuccess();
-        public event StarSuccess OnStarChanged;
-
-        public void StarBookmark(String bookmarkId)
+        public void StarBookmark(Bookmark bookmark, AsyncCallback callback)
         {
             String url = "https://www.instapaper.com/api/1/bookmarks/star";
-            String[] scriptParams = { url, "bookmark_id", bookmarkId };
-            callApi(url, scriptParams, new AsyncCallback(__starFinished));
+            String[] scriptParams = { url, "bookmark_id", bookmark.Id };
+            callApi(url, scriptParams, new AsyncCallback(delegate(IAsyncResult res)
+            {
+                bookmark.Starred = true;
+                callback.Invoke(res);
+            }));    
         }
 
-        public void UnStarBookmark(String bookmarkId)
+        public void UnStarBookmark(Bookmark bookmark, AsyncCallback callback)
         {
             String url = "https://www.instapaper.com/api/1/bookmarks/unstar";
-            String[] scriptParams = { url, "bookmark_id", bookmarkId };
-            callApi(url, scriptParams, new AsyncCallback(__starFinished));
+            String[] scriptParams = { url, "bookmark_id", bookmark.Id };
+            callApi(url, scriptParams, new AsyncCallback(delegate(IAsyncResult res)
+            {
+                bookmark.Starred = false;
+                callback.Invoke(res);
+            }));    
         }
 
-        private void __starFinished(IAsyncResult result)
-        {
-            OnStarChanged();
-        }
-
-        public delegate void BookmarkTextReceived(String text);
-        public event BookmarkTextReceived OnBookmarkTextReceived;
-
-        public void GetBookmarkText(String bookmarkId)
+        public void GetBookmarkText(Bookmark bookmark, AsyncCallback callback)
         {
             String url = "https://www.instapaper.com/api/1/bookmarks/get_text";
-            String[] scriptParams = { url, "bookmark_id", bookmarkId };
-            callApi(url, scriptParams, new AsyncCallback(__textReceived));    
-        }
-
-        private void __textReceived(IAsyncResult result)
-        {
-            OnBookmarkTextReceived(readResult());
+            String[] scriptParams = { url, "bookmark_id", bookmark.Id };
+            callApi(url, scriptParams, new AsyncCallback(delegate(IAsyncResult res) {
+                bookmark.HtmlText = readResult();
+                callback.Invoke(res);
+            }));    
         }
     } 
 

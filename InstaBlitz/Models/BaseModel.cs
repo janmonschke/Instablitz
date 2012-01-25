@@ -12,6 +12,7 @@ namespace InstaBlitz.Models
     {
         protected static String BaseUrl = "https://www.instapaper.com/api/1/";
         protected InstapaperConnector connector;
+        protected AsyncCallback currentCallback;
         public String Id;
         public String Title;
 
@@ -21,15 +22,6 @@ namespace InstaBlitz.Models
             this.Id = "";
             this.Title = "";
         }
-
-        // Gets fired when the model's been loaded
-        public event ModelCallback OnLoad;
-
-        // Gets fired when there was an error
-        public event ModelCallback OnError;
-
-        // Gets fired when the model has been deleted
-        public event ModelCallback OnDelete;
 
         // Load the model's data
         public void Load() { throw new NotImplementedException(); }
