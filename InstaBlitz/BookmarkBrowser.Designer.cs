@@ -33,7 +33,6 @@
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.FolderList = new System.Windows.Forms.ListView();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.Username = new System.Windows.Forms.Label();
             this.LogoutButton = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.BookmarkList = new System.Windows.Forms.ListView();
@@ -52,7 +51,6 @@
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
-            this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -79,7 +77,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(1129, 480);
-            this.splitContainer1.SplitterDistance = 170;
+            this.splitContainer1.SplitterDistance = 73;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer4
@@ -96,7 +94,7 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.splitContainer5);
-            this.splitContainer4.Size = new System.Drawing.Size(170, 480);
+            this.splitContainer4.Size = new System.Drawing.Size(73, 480);
             this.splitContainer4.SplitterDistance = 380;
             this.splitContainer4.TabIndex = 1;
             // 
@@ -109,7 +107,7 @@
             this.FolderList.Location = new System.Drawing.Point(0, 0);
             this.FolderList.MultiSelect = false;
             this.FolderList.Name = "FolderList";
-            this.FolderList.Size = new System.Drawing.Size(170, 380);
+            this.FolderList.Size = new System.Drawing.Size(73, 380);
             this.FolderList.TabIndex = 2;
             this.FolderList.UseCompatibleStateImageBehavior = false;
             this.FolderList.View = System.Windows.Forms.View.List;
@@ -122,32 +120,19 @@
             this.splitContainer5.Name = "splitContainer5";
             this.splitContainer5.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer5.Panel1
-            // 
-            this.splitContainer5.Panel1.Controls.Add(this.Username);
-            // 
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.LogoutButton);
-            this.splitContainer5.Size = new System.Drawing.Size(170, 96);
+            this.splitContainer5.Size = new System.Drawing.Size(73, 96);
             this.splitContainer5.SplitterDistance = 63;
             this.splitContainer5.TabIndex = 0;
-            // 
-            // Username
-            // 
-            this.Username.AutoSize = true;
-            this.Username.Location = new System.Drawing.Point(12, 21);
-            this.Username.Name = "Username";
-            this.Username.Size = new System.Drawing.Size(53, 13);
-            this.Username.TabIndex = 0;
-            this.Username.Text = "username";
             // 
             // LogoutButton
             // 
             this.LogoutButton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LogoutButton.Location = new System.Drawing.Point(0, 0);
             this.LogoutButton.Name = "LogoutButton";
-            this.LogoutButton.Size = new System.Drawing.Size(170, 29);
+            this.LogoutButton.Size = new System.Drawing.Size(73, 29);
             this.LogoutButton.TabIndex = 2;
             this.LogoutButton.Text = "Log out";
             this.LogoutButton.UseVisualStyleBackColor = true;
@@ -166,8 +151,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(955, 480);
-            this.splitContainer2.SplitterDistance = 337;
+            this.splitContainer2.Size = new System.Drawing.Size(1052, 480);
+            this.splitContainer2.SplitterDistance = 341;
             this.splitContainer2.TabIndex = 0;
             // 
             // BookmarkList
@@ -177,7 +162,7 @@
             this.BookmarkList.HideSelection = false;
             this.BookmarkList.Location = new System.Drawing.Point(0, 0);
             this.BookmarkList.Name = "BookmarkList";
-            this.BookmarkList.Size = new System.Drawing.Size(337, 480);
+            this.BookmarkList.Size = new System.Drawing.Size(341, 480);
             this.BookmarkList.TabIndex = 0;
             this.BookmarkList.UseCompatibleStateImageBehavior = false;
             this.BookmarkList.View = System.Windows.Forms.View.List;
@@ -200,7 +185,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.StarBookmarkButton);
             this.splitContainer3.Panel2.Controls.Add(this.DeleteBookmarkButton);
             this.splitContainer3.Panel2.Controls.Add(this.ArchiveButton);
-            this.splitContainer3.Size = new System.Drawing.Size(614, 480);
+            this.splitContainer3.Size = new System.Drawing.Size(707, 480);
             this.splitContainer3.SplitterDistance = 448;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -211,7 +196,7 @@
             this.BookmarkView.MinimumSize = new System.Drawing.Size(20, 20);
             this.BookmarkView.Name = "BookmarkView";
             this.BookmarkView.ScriptErrorsSuppressed = true;
-            this.BookmarkView.Size = new System.Drawing.Size(614, 448);
+            this.BookmarkView.Size = new System.Drawing.Size(707, 448);
             this.BookmarkView.TabIndex = 2;
             // 
             // theBrowser
@@ -221,7 +206,7 @@
             this.theBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.theBrowser.Name = "theBrowser";
             this.theBrowser.ScrollBarsEnabled = false;
-            this.theBrowser.Size = new System.Drawing.Size(389, 28);
+            this.theBrowser.Size = new System.Drawing.Size(482, 28);
             this.theBrowser.TabIndex = 3;
             this.theBrowser.Visible = false;
             this.theBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.theBrowser_DocumentCompleted);
@@ -241,7 +226,7 @@
             // 
             this.DeleteBookmarkButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.DeleteBookmarkButton.Enabled = false;
-            this.DeleteBookmarkButton.Location = new System.Drawing.Point(539, 0);
+            this.DeleteBookmarkButton.Location = new System.Drawing.Point(632, 0);
             this.DeleteBookmarkButton.Name = "DeleteBookmarkButton";
             this.DeleteBookmarkButton.Size = new System.Drawing.Size(75, 28);
             this.DeleteBookmarkButton.TabIndex = 0;
@@ -278,8 +263,6 @@
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
-            this.splitContainer5.Panel1.ResumeLayout(false);
-            this.splitContainer5.Panel1.PerformLayout();
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
@@ -310,7 +293,6 @@
         private System.Windows.Forms.ListView FolderList;
         private System.Windows.Forms.SplitContainer splitContainer5;
         private System.Windows.Forms.Button LogoutButton;
-        private System.Windows.Forms.Label Username;
 
     }
 }
