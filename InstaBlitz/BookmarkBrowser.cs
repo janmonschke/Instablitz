@@ -18,8 +18,6 @@ namespace InstaBlitz
     {
         User user;
         List<Bookmark> currentBookmarks;
-        int currentBookmarkIndex = 0;
-        String currentFolder = "";
 
         public BookmarkBrowser()
         {
@@ -63,9 +61,9 @@ namespace InstaBlitz
                     Console.WriteLine("Adding Folder: " + folder.Title);
                 }
                 // load bookmarks from default folder
-                loadFolder("unread");
+                // loadFolder("unread");
                 // select default folder
-                //FolderList.Items[0].Selected = true;
+                FolderList.Items[0].Selected = true;
             };
 
             user.GetFolders();
@@ -111,7 +109,11 @@ namespace InstaBlitz
         private void loadBookmark(int index)
         {
             Console.WriteLine("load bookmark index: " + index);
-            BookmarkView.DocumentText = currentBookmarks[index].HtmlText;
+            currentBookmarks[index].OnTextReceived += delegate(String text)
+            {
+                Console.WriteLine("bookmark text loaded");
+                BookmarkView.DocumentText = text;
+            };
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
@@ -171,12 +173,9 @@ namespace InstaBlitz
             
             // get bookmark_id
             int index = BookmarkList.SelectedIndices[0];
+            Console.WriteLine(BookmarkList.Items.Count);
             // load bookmark for said bookmark_id
-            if (index != currentBookmarkIndex)
-            {
-                loadBookmark(index);
-                currentBookmarkIndex = index;
-            }
+            loadBookmark(index);
             // display it in the bookmark view
         }
 
@@ -202,6 +201,5 @@ namespace InstaBlitz
             // send delete request
             // clear bookmark view
         }
-        
     }
 }
