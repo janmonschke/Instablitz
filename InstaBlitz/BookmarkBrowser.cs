@@ -155,16 +155,13 @@ namespace InstaBlitz
         {
             // clear bookmarkView
 
-            // get folder_id
-            int index = FolderList.SelectedIndices[0];
-            String folder_id = user.Folders[ index ].Id;
-
             // load bookmarks for said folder_id
-            if (folder_id != currentFolder)
+
+            foreach (int index in FolderList.SelectedIndices)
             {
-                Console.WriteLine(index + " load folder with the id: " + folder_id);
-                loadFolder(folder_id);
-                currentFolder = folder_id;
+                Console.WriteLine("selected " + index);
+                String curr = user.Folders[index].Id;
+                loadFolder(curr);
             }
         }
 
