@@ -60,7 +60,7 @@ namespace InstaBlitz
                     Console.WriteLine("Adding Folder: " + folder.Title);
                 }
                 // load bookmarks from default folder
-                loadFolder("unread");
+                //loadFolder("unread");
                 // select default folder
                 FolderList.Items[0].Selected = true;
             };
@@ -74,12 +74,13 @@ namespace InstaBlitz
             f.Id = folder_id;
 
             f.OnBookmarksReceived += renderBookmarks;
-
+            Console.WriteLine("11111111111111111111111");
             f.GetBookmarks();
         }
 
         private void renderBookmarks(List<Bookmark> bookmarks)
         {
+            Console.WriteLine("2222222222222222222222");
             //Console.WriteLine("received " + bookmarks.Count);
             //foreach(Bookmark b in bookmarks)
             //    Console.WriteLine("Title: " + b.Title + " Starred? " + b.Starred);
@@ -152,7 +153,12 @@ namespace InstaBlitz
             // get folder_id
             // load bookmarks for said folder_id
             foreach (int index in FolderList.SelectedIndices)
-                loadFolder( user.Folders[index].Id );
+            {
+                Console.WriteLine("selected " + index);
+                String curr = user.Folders[index].Id;
+                loadFolder(curr);
+            }
+                
         }
 
         private void BookmarkList_SelectedIndexChanged(object sender, EventArgs e)
