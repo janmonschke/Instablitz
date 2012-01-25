@@ -210,6 +210,7 @@
             this.BookmarkView.Location = new System.Drawing.Point(0, 0);
             this.BookmarkView.MinimumSize = new System.Drawing.Size(20, 20);
             this.BookmarkView.Name = "BookmarkView";
+            this.BookmarkView.ScriptErrorsSuppressed = true;
             this.BookmarkView.Size = new System.Drawing.Size(502, 407);
             this.BookmarkView.TabIndex = 2;
             // 

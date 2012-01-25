@@ -113,6 +113,7 @@ namespace InstaBlitz
             {
                 Console.WriteLine("bookmark text loaded");
                 BookmarkView.DocumentText = text;
+                BookmarkView.Select();
             };
             currentBookmarks[index].GetText();
         }
@@ -173,10 +174,13 @@ namespace InstaBlitz
             // clear bookmarkView
             
             // get bookmark_id
-            int index = BookmarkList.SelectedIndices[0];
-            Console.WriteLine(BookmarkList.Items.Count);
-            // load bookmark for said bookmark_id
-            loadBookmark(index);
+            foreach (int index in BookmarkList.SelectedIndices)
+            {
+                Console.WriteLine("selected " + index);
+                // load bookmark for said bookmark_id
+                loadBookmark(index);
+            }
+            
             // display it in the bookmark view
         }
 
