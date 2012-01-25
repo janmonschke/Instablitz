@@ -119,6 +119,7 @@
             listViewItem2,
             listViewItem3});
             this.FolderList.Location = new System.Drawing.Point(0, 0);
+            this.FolderList.MultiSelect = false;
             this.FolderList.Name = "FolderList";
             this.FolderList.Size = new System.Drawing.Size(138, 346);
             this.FolderList.TabIndex = 2;
