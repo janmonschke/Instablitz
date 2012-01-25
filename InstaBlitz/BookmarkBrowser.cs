@@ -17,9 +17,6 @@ namespace InstaBlitz
     public partial class BookmarkBrowser : Form
     {
         User user;
-        List<Bookmark> currentBookmarks;
-        int currentBookmarkIndex = 0;
-        String currentFolder = "";
 
         public BookmarkBrowser()
         {
@@ -65,7 +62,7 @@ namespace InstaBlitz
                 // load bookmarks from default folder
                 loadFolder("unread");
                 // select default folder
-                //FolderList.Items[0].Selected = true;
+                FolderList.Items[0].Selected = true;
             };
 
             user.GetFolders();
@@ -104,14 +101,11 @@ namespace InstaBlitz
                 BookmarkList.Items.Add(bookmark.Title);
                 Console.WriteLine("Adding Bookmark: " + bookmark.Title);
             }
-
-            currentBookmarks = bookmarks;
         }
 
-        private void loadBookmark(int index)
+        private void loadBookmark(String bookmark_id)
         {
-            Console.WriteLine("load bookmark index: " + index);
-            BookmarkView.DocumentText = currentBookmarks[index].HtmlText;
+            Console.WriteLine("load bookmark_id: " + bookmark_id);
         }
 
         private void LogoutButton_Click(object sender, EventArgs e)
@@ -156,30 +150,17 @@ namespace InstaBlitz
             // clear bookmarkView
 
             // get folder_id
-            int index = FolderList.SelectedIndices[0];
-            String folder_id = user.Folders[ index ].Id;
-
             // load bookmarks for said folder_id
-            if (folder_id != currentFolder)
-            {
-                Console.WriteLine(index + " load folder with the id: " + folder_id);
-                loadFolder(folder_id);
-                currentFolder = folder_id;
-            }
+            foreach (int index in FolderList.SelectedIndices)
+                loadFolder( user.Folders[index].Id );
         }
 
         private void BookmarkList_SelectedIndexChanged(object sender, EventArgs e)
         {
             // clear bookmarkView
-            
+            Console.WriteLine("selected: " + BookmarkList.SelectedItems[0].ToString());
             // get bookmark_id
-            int index = BookmarkList.SelectedIndices[0];
             // load bookmark for said bookmark_id
-            if (index != currentBookmarkIndex)
-            {
-                loadBookmark(index);
-                currentBookmarkIndex = index;
-            }
             // display it in the bookmark view
         }
 
