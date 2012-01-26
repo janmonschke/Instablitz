@@ -91,5 +91,32 @@ namespace TestInstablitz
             };
             
         }
+
+        /// <summary>
+        ///Ein Test für "GetBookmarks"
+        ///</summary>
+        [TestMethod()]
+        public void GetBookmarksTest()
+        {
+            Login l = new Login();
+            WebBrowser wb = l.GetBrowserElement();
+            wb.DocumentCompleted += delegate(Object sender, WebBrowserDocumentCompletedEventArgs args)
+            {
+                OAuthHelper h = new OAuthHelper(wb); // TODO: Passenden Wert initialisieren
+                InstapaperConnector target = new InstapaperConnector(h); // TODO: Passenden Wert initialisieren
+                Folder folder = new Folder(target);
+                folder.Id = Folder.STARRED;
+                folder.GetBookmarks(delegate(IAsyncResult result)
+                {
+                    // Should return an empty List in case of zero folders
+                    
+                    if (folder.Bookmarks.Count > 0)
+                        foreach (Bookmark b in folder.Bookmarks)
+                            Assert.IsNotNull(b);
+                });
+                 
+            };
+
+        }
     }
 }
