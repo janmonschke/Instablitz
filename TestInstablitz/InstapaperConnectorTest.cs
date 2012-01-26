@@ -118,5 +118,90 @@ namespace TestInstablitz
             };
 
         }
+
+        /// <summary>
+        ///Ein Test für "GetBookmarkText"
+        ///</summary>
+        [TestMethod()]
+        public void GetBookmarkText()
+        {
+            Login l = new Login();
+            WebBrowser wb = l.GetBrowserElement();
+            wb.DocumentCompleted += delegate(Object sender, WebBrowserDocumentCompletedEventArgs args)
+            {
+                OAuthHelper h = new OAuthHelper(wb); // TODO: Passenden Wert initialisieren
+                InstapaperConnector target = new InstapaperConnector(h); // TODO: Passenden Wert initialisieren
+                Folder folder = new Folder(target);
+                folder.Id = Folder.STARRED;
+                folder.GetBookmarks(delegate(IAsyncResult result)
+                {
+                    folder.Bookmarks[0].GetText(delegate(IAsyncResult res)
+                    {
+                        Assert.IsTrue(folder.Bookmarks[0].HtmlText.Length > 0);
+                    });
+                            
+                });
+
+            };
+
+        }
+
+        /// <summary>
+        ///Ein Test für "StarBookmark"
+        ///</summary>
+        [TestMethod()]
+        public void StarBookmark()
+        {
+            Login l = new Login();
+            WebBrowser wb = l.GetBrowserElement();
+            wb.DocumentCompleted += delegate(Object sender, WebBrowserDocumentCompletedEventArgs args)
+            {
+                OAuthHelper h = new OAuthHelper(wb); // TODO: Passenden Wert initialisieren
+                InstapaperConnector target = new InstapaperConnector(h); // TODO: Passenden Wert initialisieren
+                Folder folder = new Folder(target);
+                folder.Id = Folder.STARRED;
+                folder.GetBookmarks(delegate(IAsyncResult result)
+                {
+                    folder.Bookmarks[0].Star(delegate(IAsyncResult res)
+                    {
+                        Assert.IsTrue(folder.Bookmarks[0].Starred);
+
+                        
+                    });
+
+                });
+
+            };
+
+        }
+
+        /// <summary>
+        ///Ein Test für "UnStarBookmark"
+        ///</summary>
+        [TestMethod()]
+        public void UnStarBookmark()
+        {
+            Login l = new Login();
+            WebBrowser wb = l.GetBrowserElement();
+            wb.DocumentCompleted += delegate(Object sender, WebBrowserDocumentCompletedEventArgs args)
+            {
+                OAuthHelper h = new OAuthHelper(wb); // TODO: Passenden Wert initialisieren
+                InstapaperConnector target = new InstapaperConnector(h); // TODO: Passenden Wert initialisieren
+                Folder folder = new Folder(target);
+                folder.Id = Folder.STARRED;
+                folder.GetBookmarks(delegate(IAsyncResult result)
+                {
+                    folder.Bookmarks[0].UnStar(delegate(IAsyncResult res)
+                    {
+                        Assert.IsFalse(folder.Bookmarks[0].Starred);
+
+
+                    });
+
+                });
+
+            };
+
+        }
     }
 }
